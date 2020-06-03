@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 export const Result = () => {
-const [name, setName] = useState("Emil")
-const dispatch = useDispatch()
-const myName = useSelector((state)=>state.userStore.user)
+const myName = useSelector((state)=>state.userStore.user.name)
  
 return(
   <div>

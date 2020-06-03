@@ -9,7 +9,7 @@ const name = "Emil"
 
   const myName = (e) => {
     dispatch(
-      userStore.actions.changeName({
+      userStore.actions.loginUser({
         name
       })
     );
