@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { userStore } from 'reducers/userStore';
 import { Login } from './Login';
+import { Register } from './Register';
 
 export const Home = () => {
 
@@ -20,6 +21,7 @@ export const Home = () => {
 return(
   <div>
   <Login />
+  <Register />
   </div>
 )
 }

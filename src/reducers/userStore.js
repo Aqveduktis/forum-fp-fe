@@ -59,3 +59,32 @@ export const login = (name, password) =>{
     )
   }
 }
+export const register = (name, password) =>{
+  const REG_URL = 'http://localhost:8080/users'
+  return(dispatch)=>{
+    fetch(REG_URL, {
+      method: 'POST',
+      body: JSON.stringify({name, password}),
+      headers: {'Content-Type':'application/json'}
+    }).then(res=>{
+      console.log(res.ok)
+      if(res.ok){
+        return res.json()
+      }
+      else{
+        throw "could not register user"
+      }
+    })
+    .then(json => {
+      console.log(json)
+      dispatch(userStore.actions.setStatusMessage(`created user, ${json.name}`))
+    }
+
+    )
+    .catch((err)=>{
+      dispatch(userStore.actions.setStatusMessage(err))
+    }
+
+    )
+  }
+}
