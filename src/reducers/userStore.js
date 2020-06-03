@@ -3,10 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	user:{
     name:"",
+    id:"",
     accessToken:"",
     
   },
-  messages:[]
+  messages:[],
+  statusMessage:null
 };
 
 export const userStore = createSlice({
@@ -14,11 +16,46 @@ export const userStore = createSlice({
 	initialState,
 	reducers: {
 
+
+
 loginUser: (state, action) => {
-			const { name, accessToken } = action.payload;
-      state.user = {name, accessToken}
+			const { name, id, accessToken } = action.payload;
+      state.user = {name, id, accessToken}
 		},
+setStatusMessage: (state, action) =>{
+  state.statusMessage = action.payload
+}
 
   }
 
 })
+
+export const login = (name, password) =>{
+  const LOGIN_URL = 'http://localhost:8080/sessions'
+  return(dispatch)=>{
+    fetch(LOGIN_URL, {
+      method: 'POST',
+      body: JSON.stringify({name, password}),
+      headers: {'Content-Type':'application/json'}
+    }).then(res=>{
+      console.log(res.ok)
+      if(res.ok){
+        return res.json()
+      }
+      else{
+        throw "could not login"
+      }
+    })
+    .then(json => {
+      console.log(json)
+      dispatch(userStore.actions.loginUser({name:name, id:json.userId, accessToken:json.accessToken}))
+    }
+
+    )
+    .catch((err)=>{
+      dispatch(userStore.actions.setStatusMessage(err))
+    }
+
+    )
+  }
+}
