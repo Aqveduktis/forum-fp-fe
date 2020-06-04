@@ -20,8 +20,7 @@ export const Home = () => {
 //   myName()
 return(
   <div>
-  <Login />
-  <Register />
+
   </div>
 )
 }
