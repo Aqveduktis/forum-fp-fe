@@ -5,22 +5,17 @@ import { Login } from './Login';
 import { Register } from './Register';
 
 export const Home = () => {
+	// const dispatch = useDispatch()
+	// const name = "Emil"
 
-// const dispatch = useDispatch()
-// const name = "Emil"
+	//   const myName = (e) => {
+	//     dispatch(
+	//       userStore.actions.loginUser({
+	//         name
+	//       })
+	//     );
 
-//   const myName = (e) => {
-//     dispatch(
-//       userStore.actions.loginUser({
-//         name
-//       })
-//     );
-    
-//   };
-//   myName()
-return(
-  <div>
-
-  </div>
-)
-}
+	//   };
+	//   myName()
+	return <div>Hello from front page</div>;
+};
