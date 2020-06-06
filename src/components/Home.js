@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Page } from 'lib/shared';
+import { PageTitle, Text } from 'lib/text';
 
 
 export const Home = () => {
@@ -15,5 +17,10 @@ export const Home = () => {
 
 	//   };
 	//   myName()
-	return <div>Hello from front page</div>;
+	return (
+  <Page>
+  <PageTitle>Start Page</PageTitle>
+  <Text>Hello from front page</Text>
+  </Page>
+  ) 
 };
