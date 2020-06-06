@@ -1,10 +1,10 @@
 import React from 'react'
-
+import {useParams} from 'react-router-dom'
 export const GameDetails = () => {
-
+  const { id } = useParams();
   return(
     <div>
-    Hello from game detail
+    <p>Hello from game detail {id}</p>
     </div>
   )
 }

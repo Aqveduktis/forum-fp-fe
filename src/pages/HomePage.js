@@ -5,10 +5,11 @@ import { GameList } from './GameList';
 import { UserPage } from './UserPage';
 import { Header } from 'components/Header';
 import { Home } from 'components/Home';
+import { Box } from 'lib/shared';
 
 export const HomePage = () => {
 	return (
-		<div>
+    <Box>
 			<BrowserRouter>
 				<Header />
 				<Switch>
@@ -26,6 +27,6 @@ export const HomePage = () => {
 					</Route>
 				</Switch>
 			</BrowserRouter>
-		</div>
+    </Box>
 	);
 };

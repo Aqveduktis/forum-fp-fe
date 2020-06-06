@@ -3,15 +3,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Login } from '../components/Login'
 import { Register } from '../components/Register'
 import { Result } from '../components/Result'
+import { Page } from 'lib/shared'
+import {PageTitle} from 'lib/text'
 
 export const UserPage = () => {
 const dispatch = useDispatch()
-const games = useSelector((store)=>store.gameStore.gameList)
+
   return(
-    <div>
-    <Login />
+    <Page>
+    <PageTitle>Users</PageTitle>
+       <Login />
     <Register />
     <Result />
-    </div>
+    </Page>
+
   )
 }
