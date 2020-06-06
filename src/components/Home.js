@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Page } from 'lib/shared';
 import { PageTitle, Text } from 'lib/text';
 import { fetchMessage } from 'reducers/messageStore';
+import { Card, Wrapper } from 'lib/containers';
+import { MessageCard } from './MessageCard';
 
 
 export const Home = () => {
@@ -16,9 +18,11 @@ const messages = useSelector((state)=>state.messageStore.messageList)
   <Page>
   <PageTitle>Start Page</PageTitle>
   <Text>Hello from front page</Text>
+  <Wrapper>
   {messages.map((message)=>{
-   return(<Text>{message.message}</Text>)
+   return( <MessageCard info={message} /> )
   })}
+  </Wrapper>
   </Page>
   ) 
 };
