@@ -4,12 +4,15 @@ import { Page } from 'lib/containers';
 import { PageTitle, Text } from 'lib/text';
 import { fetchMessage } from 'reducers/messageStore';
 import { Card, Wrapper } from 'lib/containers';
+import {Frame, Submit} from 'lib/shared'
 import { MessageCard } from './MessageCard';
+
 
 
 export const Home = () => {
 const dispatch = useDispatch()
 const messages = useSelector((state)=>state.messageStore.messageList)
+const [text, setText] = useState("")
   useEffect(()=>{
     dispatch(fetchMessage())
   },[])
@@ -23,6 +26,14 @@ const messages = useSelector((state)=>state.messageStore.messageList)
    return( <MessageCard info={message} /> )
   })}
   </Wrapper>
+  <Frame>
+  <label>write something
+    <input id="input"
+  value={text}
+  onChange={(e)=>setText(e.target.value)} />
+  </label>
+  <Submit>Submit</Submit>
+  </Frame>
   </Page>
   ) 
 };

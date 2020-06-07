@@ -47,9 +47,35 @@ border-radius: 5px;
 `
 export const StyledLink = styled(NavLink)`
 margin: 10px;
+font-size: 1.5em;
 color: #03dac5;
 font-weight: bold;
 border-bottom: 2px solid #03dac5; 
 text-decoration: none;
 `;
+
+export const Frame = styled.form`
+display: flex;
+justify-content: space-between;
+align-items: center;
+input {
+  background-color: unset;
+  color: white;
+  height: 50px;
+  width: 200px;
+  max-width: 70%;
+  border: 2px solid white;
+}
+label {
+  color: white;
+}
+`
+
+
+export const Legend = styled.legend`
+background-color: white;
+color: orange;
+
+`
+
 

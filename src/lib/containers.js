@@ -33,3 +33,11 @@ export const Card = styled.article`
   justify-content: space-between;
   align-items: center;
 `
+export const Banner = styled.div`
+width: 95%;
+margin: 0 auto;
+display:flex;
+justify-content: space-between;
+align-items: center; 
+`
+

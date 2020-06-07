@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {StyledLink} from '../lib/shared'
 import { Title } from 'lib/text';
+import { Banner } from 'lib/containers';
+
 
 const LinkNav = styled.nav`
 margin: 10px 0;
@@ -15,13 +17,13 @@ margin: 10px 0;
 
 export const Header = () => {
 	return (
-		<div>
-      <Title>My Forum</Title>
-			<LinkNav>
-				<StyledLink to="/">Home</StyledLink>
+    <Banner>
+      <Title to="/">My Forum</Title>
+    			<LinkNav>
 				<StyledLink to="/user">User</StyledLink>
 				<StyledLink to="/games">About</StyledLink>
 			</LinkNav>
-		</div>
+    </Banner>
+
 	);
 };
