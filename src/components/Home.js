@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Page } from 'lib/shared';
+import { Page } from 'lib/containers';
 import { PageTitle, Text } from 'lib/text';
 import { fetchMessage } from 'reducers/messageStore';
 import { Card, Wrapper } from 'lib/containers';

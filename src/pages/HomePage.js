@@ -5,7 +5,7 @@ import { GameList } from './GameList';
 import { UserPage } from './UserPage';
 import { Header } from 'components/Header';
 import { Home } from 'components/Home';
-import { Box } from 'lib/shared';
+import { Box } from 'lib/containers';
 
 export const HomePage = () => {
 	return (
