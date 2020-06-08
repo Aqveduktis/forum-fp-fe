@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { combineReducers, configureStore, createStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, createStore, applyMiddleware, compose } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
 import { userStore } from './reducers/userStore';
 import { gameStore } from './reducers/gameStore';
 import { messageStore } from './reducers/messageStore';
@@ -11,20 +12,41 @@ const reducer = combineReducers({
 	gameStore: gameStore.reducer,
 	messageStore: messageStore.reducer
 });
-const store = configureStore({ reducer });
+//const store = configureStore({ reducer });
 
-// Retrieve the existing state from localstorage if it exists
-// const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
-// const enhancer = compose(persistState());
-// const store = createStore(
-// 	reducer,
-// 	persistedState,
-// 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
-// store.subscribe(() => {
-// 	localStorage.setItem('reduxState', JSON.stringify(store.getState()));
-// });
-// console.log(localStorage);
+//from louise
+const saveToLocalStorage = (state) => {
+	try {
+		const serializedState = JSON.stringify(state);
+		localStorage.setItem('forum-reduxState', serializedState);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const loadFromLocalStorage = () => {
+	try {
+		const serializedState = localStorage.getItem('forum-reduxState');
+		if (serializedState === null) return undefined;
+		return JSON.parse(serializedState);
+	} catch (e) {
+		console.log(e);
+		return undefined;
+	}
+};
+
+// const reducer = combineReducers({
+//   ui: ui.reducer,
+//   cart: cart.reducer,
+//   products: products.reducer
+// })
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const persistedState = loadFromLocalStorage();
+
+const store = createStore(reducer, persistedState, composeEnhancer(applyMiddleware(thunk)));
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 export const App = () => {
 	return (

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {StyledLink} from '../lib/shared'
 import { Title } from 'lib/text';
 import { Banner } from 'lib/containers';
+import {Result} from '../components/Result'
 
 
 const LinkNav = styled.nav`
@@ -17,6 +18,7 @@ margin: 10px 0;
 
 export const Header = () => {
 	return (
+		<>
     <Banner>
       <Title to="/">My Forum</Title>
     			<LinkNav>
@@ -24,6 +26,8 @@ export const Header = () => {
 				<StyledLink to="/games">About</StyledLink>
 			</LinkNav>
     </Banner>
+		<Result />
+		</>
 
 	);
 };
