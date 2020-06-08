@@ -9,7 +9,7 @@ console.log(games)
   return(
 
     <Wrapper>
-        {games.map((game)=>{
+        {games && games.map((game)=>{
       return(<GameCard info={game} />)
     })}
     </Wrapper>

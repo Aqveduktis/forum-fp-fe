@@ -22,7 +22,7 @@ width: 100%;
 export const GameCard = ({info}) => {
 
   return (
-        <CardLink to={`/games/${info.id}`}>
+        <CardLink to={`/games/${info.slug}`}>
           <Article>
             <img src={info.background_image} />
             <h2>{info.name}</h2>

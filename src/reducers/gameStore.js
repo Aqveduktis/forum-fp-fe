@@ -16,8 +16,8 @@ addingGames: (state, action) => {
       state.gameList = games
     },
 setGame: (state, action) => {
-      const { slug, gameInfo } = action.payload;
-      state.gameDetails[slug] = gameInfo;
+      const gameInfo = action.payload;
+      state.selectedGame = gameInfo;
     },
 newMessage: (state, action)=>{
   const {message} = action.payload
@@ -30,10 +30,21 @@ newMessage: (state, action)=>{
 
 })
 export const fetchGames = () => {
-  const GAMES_URL = 'https://api.rawg.io/api/games?ordering=-rating0';
+  const GAMES_URL = 'http://localhost:8080/games';
   return (dispatch) => {
     fetch(GAMES_URL)
       .then((res) => res.json())
-      .then((json) => dispatch(gameStore.actions.addingGames(json.results)));
+      .then((json) => dispatch(gameStore.actions.addingGames(json)));
+  };
+};
+
+export const fetchOneGame = (slug) => {
+  const GAMES_URL = `http://localhost:8080/games/${slug}`; 
+  return (dispatch) => {
+    fetch(GAMES_URL)
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(gameStore.actions.setGame(json))
+      })
   };
 };

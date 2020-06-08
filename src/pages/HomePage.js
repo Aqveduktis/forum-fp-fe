@@ -22,7 +22,7 @@ export const HomePage = () => {
 					<Route path="/games" exact>
 						<GameList />
 					</Route>
-					<Route path="/games/:id">
+					<Route path="/games/:slug">
 						<GameDetails />
 					</Route>
 				</Switch>
