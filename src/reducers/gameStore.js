@@ -4,7 +4,8 @@ import { userStore } from './userStore';
 const initialState = {
 	gameList: [],
 	selectedGame: {},
-	selectedGenre: {}
+	selectedGenre: {},
+  fetchingStatus: null,
 };
 
 export const gameStore = createSlice({
@@ -19,6 +20,9 @@ export const gameStore = createSlice({
 			const gameInfo = action.payload;
 			state.selectedGame = gameInfo;
 		},
+    setFetchingStatus: (state, action) => {
+      state.fetchingStatus = action.payload
+    },
 		newMessage: (state, action) => {
 			const { message } = action.payload;
 			const newList = state.messageList;
@@ -31,18 +35,74 @@ export const fetchGames = () => {
 	const GAMES_URL = 'http://localhost:8080/games';
 	return (dispatch) => {
 		dispatch(userStore.actions.setLoading(true));
-		fetch(GAMES_URL).then((res) => res.json()).then((json) => {
-			dispatch(gameStore.actions.addingGames(json));
-			dispatch(userStore.actions.setLoading(false));
-		});
+    dispatch(gameStore.actions.setFetchingStatus("fetching all games"))
+		fetch(GAMES_URL)
+    .then((res) => {
+				console.log(res.ok);
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw 'could not fetch games';
+				}
+			})
+			.then((json) => {
+				console.log(json);
+        dispatch(gameStore.actions.setFetchingStatus(null))
+        dispatch(gameStore.actions.addingGames(json))
+        dispatch(userStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				dispatch(gameStore.actions.setFetchingStatus(err))
+        dispatch(userStore.actions.setLoading(false));
+			});
+
 	};
 };
 
 export const fetchOneGame = (slug) => {
 	const GAMES_URL = `http://localhost:8080/games/${slug}`;
 	return (dispatch) => {
-		fetch(GAMES_URL).then((res) => res.json()).then((json) => {
-			dispatch(gameStore.actions.setGame(json));
-		});
+    dispatch(userStore.actions.setLoading(true));
+    dispatch(gameStore.actions.setFetchingStatus(`fetching game ${slug}`))
+		fetch(GAMES_URL)
+    .then((res) => {
+				console.log(res.ok);
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw 'could not fetch games';
+				}
+			})
+			.then((json) => {
+				console.log(json);
+        dispatch(gameStore.actions.setFetchingStatus(null))
+       dispatch(gameStore.actions.setGame(json));
+        dispatch(userStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				dispatch(gameStore.actions.setFetchingStatus(err))
+       dispatch(gameStore.actions.setGame({}));
+        dispatch(userStore.actions.setLoading(false));
+			});
+
 	};
 };
+
+
+// .then((res) => {
+// 				console.log(res.ok);
+// 				if (res.ok) {
+// 					return res.json();
+// 				} else {
+// 					throw 'could not register user';
+// 				}
+// 			})
+// 			.then((json) => {
+// 				console.log(json);
+//         dispatch(userStore.actions.setRegisterMessage(`created user, ${json.name}`))
+//         dispatch(userStore.actions.setLoading(false));
+// 			})
+// 			.catch((err) => {
+// 				dispatch(userStore.actions.setRegisterMessage(err));
+//         dispatch(userStore.actions.setLoading(false));
+// 			});

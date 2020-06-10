@@ -7,7 +7,8 @@ const initialState = {
 		accessToken: ''
 	},
 	messages: [],
-	statusMessage: null,
+	loginMessage: null,
+  registerMessage: null,
 	isLoading: false
 };
 
@@ -19,8 +20,11 @@ export const userStore = createSlice({
 			const { name, id, accessToken } = action.payload;
 			state.user = { name, id, accessToken };
 		},
-		setStatusMessage: (state, action) => {
-			state.statusMessage = action.payload;
+		setLoginMessage: (state, action) => {
+			state.loginMessage = action.payload;
+		},
+    	setRegisterMessage: (state, action) => {
+			state.registerMessage = action.payload;
 		},
 		setLoading: (state, action) => {
 			state.isLoading = action.payload;
@@ -32,6 +36,7 @@ export const login = (name, password) => {
 	const LOGIN_URL = 'http://localhost:8080/sessions';
 	return (dispatch) => {
 		dispatch(userStore.actions.setLoading(true));
+    dispatch(userStore.actions.setLoginMessage("trying to login"))
 		fetch(LOGIN_URL, {
 			method: 'POST',
 			body: JSON.stringify({ name, password }),
@@ -48,10 +53,11 @@ export const login = (name, password) => {
 			.then((json) => {
 				console.log(json);
 				dispatch(userStore.actions.loginUser({ name: name, id: json.userId, accessToken: json.accessToken }));
+        dispatch(userStore.actions.setLoginMessage("sucessful login"))
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setStatusMessage(err));
+				dispatch(userStore.actions.setLoginMessage(err));
 				dispatch(userStore.actions.setLoading(false));
 			});
 	};
@@ -59,6 +65,8 @@ export const login = (name, password) => {
 export const register = (name, password) => {
 	const REG_URL = 'http://localhost:8080/users';
 	return (dispatch) => {
+    dispatch(userStore.actions.setLoading(true));
+    dispatch(userStore.actions.setRegisterMessage("trying to register"))
 		fetch(REG_URL, {
 			method: 'POST',
 			body: JSON.stringify({ name, password }),
@@ -74,10 +82,12 @@ export const register = (name, password) => {
 			})
 			.then((json) => {
 				console.log(json);
-				dispatch(userStore.actions.setStatusMessage(`created user, ${json.name}`));
+        dispatch(userStore.actions.setRegisterMessage(`created user, ${json.name}`))
+        dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setStatusMessage(err));
+				dispatch(userStore.actions.setRegisterMessage(err));
+        dispatch(userStore.actions.setLoading(false));
 			});
 	};
 };
