@@ -28,9 +28,10 @@ export const Home = () => {
 		<Page>
 			<PageTitle>Start Page</PageTitle>
 			<Wrapper>
-				{messages.map((message) => {
+				{messages && messages.map((message) => {
 					return <MessageCard info={message} />;
 				})}
+       {!messages.length && <Text>404 no messages</Text>} 
 			</Wrapper>
       <TextBox slug="general" />
 		</Page>

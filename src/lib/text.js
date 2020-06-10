@@ -16,7 +16,8 @@ export const Title = styled(Link)`
 width: auto;
 font-size: 2.5em;
 padding: 10px;
-color: palevioletred;
-border: 1px solid palevioletred;
+color: #7986a7;
+border: 1px solid #7986a7;
+text-decoration: none;
 `
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-
+//#1F2933;
 export const Box = styled.div`
-background-color: #121212;
+background-color: #1F2933;
 width: 95vw;
 margin: 0 auto;
 
