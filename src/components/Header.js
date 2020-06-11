@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 import {useSelector} from 'react-redux'
 import styled, {keyframes} from 'styled-components';
 import {StyledLink} from '../lib/shared'
-import { Title } from 'lib/text';
+import { Title, Text } from 'lib/text';
 import { Banner } from 'lib/containers';
-import {Result} from '../components/Result'
-import { StatusMessages } from './StatusMessages';
 import { UserLogo } from 'lib/UserLogo';
-
 
 const LinkNav = styled.nav`
 margin: 10px 0;
@@ -23,24 +20,30 @@ const colorChanging = keyframes`
 100% {color: white;}
 
 `
+const Wrapper = styled.div`
+display: flex;
+justify-content: flex-end;
+align-items: center;
 
+`
 
 
 const Loading = styled.p`
 font-size: 20px;
 font-width: bold;
 animation: ${colorChanging} 5s linear infinite;
-
 `
 
 
 export const Header = () => {
 	const isLoading = useSelector((state)=>state.userStore.isLoading)
+	const name = useSelector((state)=>state.userStore.user.name)
 	return (
 		<>
     <Banner>
       <Title to="/">My Forum</Title>
-			<UserLogo size={100} />
+			<Wrapper><UserLogo size={100} /><Text>{ name ? name : "please login"}</Text></Wrapper>
+			
     </Banner>
 		<Banner>
 		<LinkNav>
@@ -49,10 +52,6 @@ export const Header = () => {
 			</LinkNav>
 			{isLoading && <Loading>Loading</Loading>}
     </Banner>
-	
-    <StatusMessages />
-		<Result />
 		</>
-
 	);
 };

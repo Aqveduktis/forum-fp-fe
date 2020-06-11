@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useHistory } from 'react-router-dom';
 
 const initialState = {
 	user: {
@@ -8,7 +9,7 @@ const initialState = {
 	},
 	messages: [],
 	loginMessage: null,
-  registerMessage: null,
+	registerMessage: null,
 	isLoading: false
 };
 
@@ -23,7 +24,7 @@ export const userStore = createSlice({
 		setLoginMessage: (state, action) => {
 			state.loginMessage = action.payload;
 		},
-    	setRegisterMessage: (state, action) => {
+		setRegisterMessage: (state, action) => {
 			state.registerMessage = action.payload;
 		},
 		setLoading: (state, action) => {
@@ -36,24 +37,25 @@ export const login = (name, password) => {
 	const LOGIN_URL = 'http://localhost:8080/sessions';
 	return (dispatch) => {
 		dispatch(userStore.actions.setLoading(true));
-    dispatch(userStore.actions.setLoginMessage("trying to login"))
+		dispatch(userStore.actions.setLoginMessage('trying to login'));
 		fetch(LOGIN_URL, {
 			method: 'POST',
 			body: JSON.stringify({ name, password }),
 			headers: { 'Content-Type': 'application/json' }
 		})
 			.then((res) => {
-				console.log(res.ok);
+				console.log(res.status);
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw 'could not login';
+					throw `could not login, error:${res.status}`;
 				}
 			})
 			.then((json) => {
 				console.log(json);
 				dispatch(userStore.actions.loginUser({ name: name, id: json.userId, accessToken: json.accessToken }));
-        dispatch(userStore.actions.setLoginMessage("sucessful login"))
+				dispatch(userStore.actions.setLoginMessage(null));
+				dispatch(userStore.actions.setRegisterMessage(null));
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
@@ -65,8 +67,8 @@ export const login = (name, password) => {
 export const register = (name, password) => {
 	const REG_URL = 'http://localhost:8080/users';
 	return (dispatch) => {
-    dispatch(userStore.actions.setLoading(true));
-    dispatch(userStore.actions.setRegisterMessage("trying to register"))
+		dispatch(userStore.actions.setLoading(true));
+		dispatch(userStore.actions.setRegisterMessage('trying to register'));
 		fetch(REG_URL, {
 			method: 'POST',
 			body: JSON.stringify({ name, password }),
@@ -82,12 +84,12 @@ export const register = (name, password) => {
 			})
 			.then((json) => {
 				console.log(json);
-        dispatch(userStore.actions.setRegisterMessage(`created user, ${json.name}`))
-        dispatch(userStore.actions.setLoading(false));
+				dispatch(userStore.actions.setRegisterMessage(`created user, ${json.name}`));
+				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
 				dispatch(userStore.actions.setRegisterMessage(err));
-        dispatch(userStore.actions.setLoading(false));
+				dispatch(userStore.actions.setLoading(false));
 			});
 	};
 };

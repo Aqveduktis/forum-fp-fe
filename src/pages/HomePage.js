@@ -6,10 +6,11 @@ import { UserPage } from './UserPage';
 import { Header } from 'components/Header';
 import { Home } from 'components/Home';
 import { Box } from 'lib/containers';
+import { Footer } from 'components/Footer';
 
 export const HomePage = () => {
 	return (
-    <Box>
+		<Box>
 			<BrowserRouter>
 				<Header />
 				<Switch>
@@ -26,7 +27,8 @@ export const HomePage = () => {
 						<GameDetails />
 					</Route>
 				</Switch>
+				<Footer />
 			</BrowserRouter>
-    </Box>
+		</Box>
 	);
 };
