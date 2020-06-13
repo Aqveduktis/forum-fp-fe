@@ -4,12 +4,16 @@ import styled from 'styled-components';
 
 const CardLink = styled(Link)`
 width: 30%;
-min-width: 300px;
-`;
+text-decoration: none;
+@media (max-width: 576px) {
+  width: 100%;
+}
+`
+;
 
 const Article = styled.article`
 	width: 100%;
-	background-color: gray;
+	background-color: darkslategray;
 	color: white;
 
 	img {
@@ -19,6 +23,7 @@ const Article = styled.article`
 	}
 	h2 {
 		text-align: center;
+    height: 100px;
 	}
 `;
 
