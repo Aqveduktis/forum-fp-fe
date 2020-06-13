@@ -24,21 +24,21 @@ img {
 
 export const GameDetails = () => {
   const { slug } = useParams();
-  console.log(slug)
   const dispatch = useDispatch()
   const [textMessage, setTextMessage] = useState("")
 
   const user = useSelector(state=>state.userStore.user)
   const posts = useSelector((state)=>state.messageStore.messageList.filter((item)=>(item.game == slug)))
+    const game = useSelector(state => state.gameStore.selectedGame)
+  console.log("game", game)
   
   console.log(user)
   console.log("posts", posts)
   //const postMessage
 useEffect(()=>{
 dispatch(fetchOneGame(slug))
-},[])
-  const game = useSelector(state => state.gameStore.selectedGame)
-  console.log(game)
+},[slug])
+
   const handleForm = (event) => {
     event.preventDefault()
     dispatch(postMessage(user, textMessage, game.slug))
@@ -58,7 +58,7 @@ dispatch(fetchOneGame(slug))
       )
     })}
     <Gallery>
-    {game && game.screenshots.map((picture)=>{
+    {game.screenshots && game.screenshots.map((picture)=>{
       return(
         <img src={picture.image} />
       )

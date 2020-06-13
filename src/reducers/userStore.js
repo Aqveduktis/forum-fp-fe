@@ -8,6 +8,7 @@ const initialState = {
 		accessToken: ''
 	},
 	messages: [],
+  games: [],
 	loginMessage: null,
 	registerMessage: null,
 	isLoading: false
@@ -24,8 +25,14 @@ export const userStore = createSlice({
 		setLoginMessage: (state, action) => {
 			state.loginMessage = action.payload;
 		},
-		setRegisterMessage: (state, action) => {
+    	setRegisterMessage: (state, action) => {
 			state.registerMessage = action.payload;
+		},
+	    addingMessages: (state, action) => {
+			state.messages = action.payload;
+		},
+    addingGames: (state, action) => {
+			state.games = action.payload;
 		},
 		setLoading: (state, action) => {
 			state.isLoading = action.payload;
@@ -91,5 +98,44 @@ export const register = (name, password) => {
 				dispatch(userStore.actions.setRegisterMessage(err));
 				dispatch(userStore.actions.setLoading(false));
 			});
+	};
+};
+
+export const addingUser = (user) => {
+	const REG_URL = `http://localhost:8080/users/${user.id}`;
+	return (dispatch) => {
+		dispatch(userStore.actions.setLoading(true));
+		dispatch(userStore.actions.setLoginMessage('trying to fetch personal information'));
+		fetch(REG_URL, {
+      method: 'GET',
+      headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}`}
+      })
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw 'could not find user';
+				}
+			})
+			.then((json) => {
+				console.log(json);
+        dispatch(userStore.actions.addingMessages(json.messages))
+        dispatch(userStore.actions.addingGames(json.favoriteGames))
+				dispatch(userStore.actions.setLoginMessage(null));
+				dispatch(userStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoading(false));
+			});
+	};
+};
+
+export const logout = () => {
+	return (dispatch) => {
+		dispatch(userStore.actions.loginUser({ name: "", id: "", accessToken: "" }));
+    dispatch(userStore.actions.addingMessages([]));
+    dispatch(userStore.actions.addingGames([]));
+
 	};
 };

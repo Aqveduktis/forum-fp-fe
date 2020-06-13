@@ -48,12 +48,12 @@ border-radius: 5px;
 export const StyledLink = styled(NavLink)`
 margin: 10px;
 font-size: 1.5em;
-color: #03dac5;
+color: silver;
 font-weight: bold;
-border-bottom: 2px solid #03dac5; 
+border-bottom: 2px solid silver; 
 text-decoration: none;
 `;
-
+//#03dac5;
 export const Frame = styled.form`
 display: flex;
 justify-content: space-between;

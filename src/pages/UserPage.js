@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Login } from '../components/Login';
-import { Register } from '../components/Register';
+import { User } from '../components/User';
 import { Page } from 'lib/containers';
 import { PageTitle, Text } from 'lib/text';
 import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from 'lib/shared';
@@ -16,23 +16,12 @@ const Wrapper = styled.div`
 `;
 
 export const UserPage = () => {
-	const dispatch = useDispatch();
-	const [ checked, setChecked ] = useState(false);
+  const user = useSelector((state)=>state.userStore.user)
 
 	return (
 		<Page>
 			<PageTitle>Users</PageTitle>
-			<Text>flip the switch to login/register</Text>
-			<CheckBoxWrapper>
-				<CheckBox
-					id="checkbox"
-					type="checkbox"
-					checked={checked}
-					onChange={(e) => setChecked(e.target.checked)}
-				/>
-				<CheckBoxLabel htmlFor="checkbox" />
-			</CheckBoxWrapper>
-			<Wrapper>{checked ? <Register /> : <Login />}</Wrapper>
+{user.name ? <User user={user} /> : <Login />}
 		</Page>
 	);
 };

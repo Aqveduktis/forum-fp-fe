@@ -11,7 +11,8 @@ const LinkNav = styled.nav`
 margin: 10px 0;
 
 .active {
-  color: silver;
+  color: #bc7a94;
+  border-color: #bc7a94;
 }
 `
 const colorChanging = keyframes`

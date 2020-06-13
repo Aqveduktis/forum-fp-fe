@@ -37,7 +37,11 @@ export const Banner = styled.div`
 width: 95%;
 margin: 0 auto;
 display:flex;
+flex-wrap: nowrap; 
 justify-content: space-between;
 align-items: center; 
+@media (max-width: 576px) {
+  flex-wrap: wrap;
+}
 `
 
