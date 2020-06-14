@@ -91,8 +91,9 @@ export const postMessage = (user, message, game) => {
        }
      })
      .then(json=>{
-       dispatch(messageStore.actions.setMessageStatus("posted the message"))
+       dispatch(messageStore.actions.setMessageStatus(null))
        dispatch(messageStore.actions.newMessage(json))
+       dispatch(userStore.actions.addingOneMessage(json));
        dispatch(userStore.actions.setLoading(false));
        
      })

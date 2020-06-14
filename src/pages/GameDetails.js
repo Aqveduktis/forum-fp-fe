@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {postMessage} from 'reducers/messageStore'
 import { fetchOneGame } from 'reducers/gameStore';
 import { addingSlug } from 'reducers/userStore';
+import { TextBox } from 'components/TextBox';
+import { StarLogo } from 'lib/StarLogo';
 
 const Gallery = styled.div`
 width: 100%;
@@ -21,6 +23,11 @@ img {
   border: 5px solid black;
 }
 `
+const StarButton = styled.button`
+background: none;
+border: none;
+cursor: pointer;
+`
 
 
 export const GameDetails = () => {
@@ -31,10 +38,7 @@ export const GameDetails = () => {
   const user = useSelector(state=>state.userStore.user)
   const posts = useSelector((state)=>state.messageStore.messageList.filter((item)=>(item.game == slug)))
     const game = useSelector(state => state.gameStore.selectedGame)
-  console.log("game", game)
-  
-  console.log(user)
-  console.log("posts", posts)
+  const myGames = useSelector((state)=>state.userStore.games)
   //const postMessage
 useEffect(()=>{
 dispatch(fetchOneGame(slug))
@@ -43,14 +47,17 @@ dispatch(fetchOneGame(slug))
   const handleForm = (event) => {
     event.preventDefault()
     dispatch(postMessage(user, textMessage, game.slug))
+    setTextMessage("")
   }
   const handleLike = () => {
     dispatch(addingSlug(user, slug))
   }
+  
   return(
     <Page>
     <PageTitle>Game Detail</PageTitle>
-    <Button onClick={handleLike}>Like this Game</Button>
+    {myGames && <StarButton onClick={handleLike} disabled={myGames.includes(slug)}>
+     <StarLogo clicked={myGames.includes(slug)} /></StarButton>}
     <Banner>
     <div>
         {game && <Text>{game.name}</Text>}
@@ -59,19 +66,14 @@ dispatch(fetchOneGame(slug))
     {!user.name && <Text>please login</Text>}
     <Text> {game.rating} </Text>
      <Text> {game.released} </Text>
+     <Text>Comments</Text>
      {posts && posts.map((post)=>{
       return(
         <Text>{post.message}</Text>
       )
     })}
     </div>
-        <form onSubmit={handleForm}>
-      <fieldset>
-    <legend>Simple fieldset</legend>
-  <textarea value={textMessage} onChange={(e)=>setTextMessage(e.target.value)} />
- <Button>submit</Button>
-  </fieldset>
-    </form>
+    <TextBox slug={slug} />
     </Banner>
 
     <Gallery>

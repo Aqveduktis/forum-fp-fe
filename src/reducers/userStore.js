@@ -31,6 +31,11 @@ export const userStore = createSlice({
 	    addingMessages: (state, action) => {
 			state.messages = action.payload;
 		},
+    addingOneMessage: (state, action) => {
+      const myList = state.messages
+      myList.push(action.payload)
+      state.messages = myList
+    },
     addingGames: (state, action) => {
 			state.games = action.payload;
 		},
