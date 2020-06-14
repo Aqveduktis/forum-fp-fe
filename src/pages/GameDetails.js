@@ -7,6 +7,7 @@ import { PageTitle, Text } from 'lib/text';
 import { useSelector, useDispatch } from 'react-redux';
 import {postMessage} from 'reducers/messageStore'
 import { fetchOneGame } from 'reducers/gameStore';
+import { addingSlug } from 'reducers/userStore';
 
 const Gallery = styled.div`
 width: 100%;
@@ -43,9 +44,13 @@ dispatch(fetchOneGame(slug))
     event.preventDefault()
     dispatch(postMessage(user, textMessage, game.slug))
   }
+  const handleLike = () => {
+    dispatch(addingSlug(user, slug))
+  }
   return(
     <Page>
     <PageTitle>Game Detail</PageTitle>
+    <Button onClick={handleLike}>Like this Game</Button>
     <Banner>
     <div>
         {game && <Text>{game.name}</Text>}

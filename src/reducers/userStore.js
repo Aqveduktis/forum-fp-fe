@@ -36,7 +36,14 @@ export const userStore = createSlice({
 		},
 		setLoading: (state, action) => {
 			state.isLoading = action.payload;
-		}
+		},
+    removeMessage: (state, action) => {
+  const message = action.payload
+   const oldList = state.messages
+  const newList = oldList.filter((item)=>(item._id !== message._id))
+  state.messages = newList
+
+}
 	}
 });
 
@@ -130,6 +137,34 @@ export const addingUser = (user) => {
 			});
 	};
 };
+export const addingSlug = (user, slug) => {
+	const REG_URL = `http://localhost:8080/users/${user.id}/${slug}`;
+	return (dispatch) => {
+		dispatch(userStore.actions.setLoading(true));
+		dispatch(userStore.actions.setLoginMessage('trying to add a game'));
+		fetch(REG_URL, {
+      method: 'PUT',
+      headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}`}
+      })
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw 'could not find user';
+				}
+			})
+			.then((json) => {
+				console.log(json);
+        dispatch(userStore.actions.addingGames(json.favoriteGames))
+				dispatch(userStore.actions.setLoginMessage(null));
+				dispatch(userStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoading(false));
+			});
+	};
+};
 
 export const logout = () => {
 	return (dispatch) => {
@@ -137,5 +172,36 @@ export const logout = () => {
     dispatch(userStore.actions.addingMessages([]));
     dispatch(userStore.actions.addingGames([]));
 
+	};
+};
+
+export const deleteUser = (user) => {
+	const REG_URL = `http://localhost:8080/users/${user.id}`;
+	return (dispatch) => {
+		dispatch(userStore.actions.setLoading(true));
+		dispatch(userStore.actions.setLoginMessage('trying to fetch personal information'));
+		fetch(REG_URL, {
+      method: 'DELETE',
+      headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}`}
+      })
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw 'could not find user';
+				}
+			})
+			.then((json) => {
+				console.log(json);
+        dispatch(userStore.actions.loginUser({ name: "", id: "", accessToken: "" }));
+        dispatch(userStore.actions.addingMessages([]))
+        dispatch(userStore.actions.addingGames([]))
+				dispatch(userStore.actions.setLoginMessage("removed user"));
+				dispatch(userStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoading(false));
+			});
 	};
 };

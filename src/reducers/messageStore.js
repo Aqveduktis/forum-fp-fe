@@ -23,42 +23,26 @@ newMessage: (state, action)=>{
   newList.push(message)
   state.messageList = newList
 
+},
+changingMessage: (state, action)=>{
+  const message = action.payload
+  const oldList = state.messageList
+  const newList = oldList.filter((item)=>(item._id !== message._id))
+  newList.push(message)
+  state.messageList = newList
+
+},
+removeMessage: (state, action) => {
+  const message = action.payload
+   const oldList = state.messageList
+  const newList = oldList.filter((item)=>(item._id !== message._id))
+  state.messageList = newList
+
 }
   }
 
 })
-export const postMessage = (user, message, game) => {
-  const URL = `http://localhost:8080/users/${user.id}/messages`
-  return dispatch =>{
-    dispatch(userStore.actions.setLoading(true));
-    dispatch(messageStore.actions.setMessageStatus("trying to post a message"))
-       fetch(URL, {
-       method: 'POST',
-       body: JSON.stringify({message, game}),
-       headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}` }
-     })
-     .then(res=>{
-       if(res.ok){
-         return res.json()
-       }
-       else{
-         throw "could not post message"
-       }
-     })
-     .then(json=>{
-       
-    dispatch(messageStore.actions.setMessageStatus("posted the message"))
-       dispatch(messageStore.actions.newMessage(json))
-       dispatch(userStore.actions.setLoading(false));
-       console.log(json)
-     })
-     .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus(err))
-        dispatch(userStore.actions.setLoading(false));
-     })
 
-  }
-}
 
 export const fetchMessage = () => {
   const URL = `http://localhost:8080/messages`
@@ -81,12 +65,108 @@ export const fetchMessage = () => {
        console.log(json)
      })
      .catch((err)=>{
-       dispatch(messageStore.actions.setMessageStatus(err))
+       console.log(err)
+       dispatch(messageStore.actions.setMessageStatus("a error"))
        dispatch(userStore.actions.setLoading(false));
      })
 
   }
 }
+export const postMessage = (user, message, game) => {
+  const URL = `http://localhost:8080/messages`
+  return dispatch =>{
+    dispatch(userStore.actions.setLoading(true));
+    dispatch(messageStore.actions.setMessageStatus("trying to post a message"))
+       fetch(URL, {
+       method: 'POST',
+       body: JSON.stringify({message, game}),
+       headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}` }
+     })
+     .then(res=>{
+       if(res.ok){
+         return res.json()
+       }
+       else{
+         throw "could not post message"
+       }
+     })
+     .then(json=>{
+       dispatch(messageStore.actions.setMessageStatus("posted the message"))
+       dispatch(messageStore.actions.newMessage(json))
+       dispatch(userStore.actions.setLoading(false));
+       
+     })
+     .catch((err) => {
+       dispatch(messageStore.actions.setMessageStatus(err))
+        dispatch(userStore.actions.setLoading(false));
+     })
+
+  }
+}
+
+export const likeMessage = ( message) => {
+  const URL = `http://localhost:8080/messages/${message._id}/like`
+  return dispatch =>{
+    dispatch(userStore.actions.setLoading(true));
+    dispatch(messageStore.actions.setMessageStatus("trying to like a message"))
+       fetch(URL, {
+       method: 'PUT',
+       headers: {'Content-Type':'application/json' }
+     })
+     .then(res=>{
+       if(res.ok){
+         return res.json()
+       }
+       else{
+         throw "could not like message"
+       }
+     })
+     .then(json=>{
+       dispatch(messageStore.actions.setMessageStatus("liked the message"))
+       dispatch(messageStore.actions.changingMessage(json))
+       dispatch(userStore.actions.setLoading(false));
+       
+     })
+     .catch((err) => {
+       dispatch(messageStore.actions.setMessageStatus(err))
+        dispatch(userStore.actions.setLoading(false));
+     })
+
+  }
+}
+
+export const deleteMessage = (message, user) => {
+  const URL = `http://localhost:8080/messages/${message._id}`
+  return dispatch => {
+    dispatch(userStore.actions.setLoading(true));
+    dispatch(messageStore.actions.setMessageStatus("trying to remove a message"))
+    fetch(URL, {
+       method: 'DELETE',
+       headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}` }
+     })
+     .then(res=>{
+       if(res.ok){
+         return res.json()
+       }
+       else{
+         throw "could not remove message"
+       }
+     })
+     .then(json=>{
+       console.log("removing", json)
+       dispatch(messageStore.actions.setMessageStatus("removed the message"))
+       dispatch(messageStore.actions.removeMessage(message))
+       dispatch(userStore.actions.removeMessage(message))
+       dispatch(userStore.actions.setLoading(false));
+       
+     })
+     .catch((err) => {
+       dispatch(messageStore.actions.setMessageStatus(err))
+        dispatch(userStore.actions.setLoading(false));
+     })
+  }
+}
+
 //'/users/:id/messages
 
 // export const register = (name, password) =>{

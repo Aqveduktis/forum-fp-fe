@@ -9,10 +9,12 @@ export const StatusMessages = () => {
 	const messageText = useSelector((state) => state.messageStore.messageStatus);
 	return (
 		<div>
-			<Text>{loginText}</Text>
+		<Text>{loginText}</Text>
 			<Text>{registerText}</Text>
 			<Text>{gameText}</Text>
-			<Text>{messageText}</Text>
+      <Text>{messageText}</Text>
 		</div>
 	);
 };
+	
+			
