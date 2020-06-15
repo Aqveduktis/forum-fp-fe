@@ -16,6 +16,8 @@ border: 1px solid gray;
 `
 const Box = styled.div`
 width: 100%;
+box-sizing: border-box;
+padding: 10px;
 border-top: 1px solid gray;
 border-bottom: 1px solid gray;
 `
@@ -50,8 +52,8 @@ export const MessageCard = ({ info }) => {
     <Article>
     <SmallLink to={ (info.game !== 'general') ? `/games/${info.game}`  : '/games'}>{info.game}</SmallLink>
     <Box>
-    		<Text>{info.message}</Text>
-			<Text>{info.user.name}</Text>
+    		<Text size="1.4">{info.message}</Text>
+			<Text color="gray">user: {info.user.name}</Text>
     </Box>
     <Banner> <Text><Moment fromNow>{info.createdAt}</Moment></Text>
     <HeartButton color="palevioletred" width="50" onClick={handleLike}><HeartLogo /><p>{info.likes}</p></HeartButton></Banner>

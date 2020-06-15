@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import {Link} from 'react-router-dom'
 import {Border, Label, Input, Submit} from 'lib/form'
 import {Text, NormalLink} from 'lib/text'
 import {postMessage} from 'reducers/messageStore'
@@ -22,7 +20,7 @@ export const TextBox = ({slug}) => {
     <div>
     {user.name && 
     <Border onSubmit={handleSubmit}>
-    <Label for="textbox">Write your message</Label>
+    <Label htmlFor="textbox">Write your message</Label>
     <Input id="textbox" value={text} onChange={(e)=>setText(e.target.value)} />
     <Submit type="submit">Submit</Submit>
    

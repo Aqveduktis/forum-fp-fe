@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { userStore, login, register } from 'reducers/userStore';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login, register } from 'reducers/userStore';
 import { MyForm } from './MyForm';
-import { Page } from 'lib/containers';
-import { PageTitle, Text } from 'lib/text';
+import { Text } from 'lib/text';
 import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from 'lib/shared';
 
 
 export const Login = () => {
-
-  	const [ checked, setChecked ] = useState(false);
-	const userName = useSelector((state) => state.userStore.user.name);
-	let history = useHistory();
+  const [ checked, setChecked ] = useState(false);
 	const dispatch = useDispatch();
 
 	const handleLogin = (name, password) => {

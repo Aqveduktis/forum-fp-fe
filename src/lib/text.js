@@ -1,8 +1,9 @@
 import styled, {keyframes} from 'styled-components'
 import {Link, NavLink} from 'react-router-dom'
+
 export const Text = styled.p`
-color: white;
-font-size: 1.0em;
+color: ${props=> props.color ||"white"};
+font-size: ${props=> props.size ||"1.0"}em;
 
 `
 
@@ -40,6 +41,11 @@ text-decoration: none;
 export const SmallLink = styled(Link)`
 color: cyan;
 text-decoration: none;
+display: block;
+cursor: pointer;
+&:hover {
+  color: lightgray;
+}
 `
 
 const colorChanging = keyframes`

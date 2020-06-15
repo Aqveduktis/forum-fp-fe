@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { userStore, login } from 'reducers/userStore';
+import { useDispatch } from 'react-redux';
 import { Form, FormTitle, TextInput, Submit } from 'lib/form';
 
 export const MyForm = ({ handleSubmit, info }) => {

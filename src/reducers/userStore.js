@@ -36,6 +36,7 @@ export const userStore = createSlice({
       myList.push(action.payload)
       state.messages = myList
     },
+    
     addingGames: (state, action) => {
 			state.games = action.payload;
 		},
@@ -140,7 +141,8 @@ export const addingUser = (user) => {
 			});
 	};
 };
-export const addingSlug = (user, slug) => {
+
+export const changingSlug = (user, slug) => {
 	const REG_URL = `http://localhost:8080/users/${user.id}/${slug}`;
 	return (dispatch) => {
 		dispatch(userStore.actions.setLoading(true));

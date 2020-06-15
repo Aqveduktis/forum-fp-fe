@@ -53,4 +53,16 @@ margin: 10px 0;
   border-color: #bc7a94;
 }
 `
+export const Gallery = styled.div`
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 5px solid black;
+}
+`
 
