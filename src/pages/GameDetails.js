@@ -10,6 +10,7 @@ import { fetchOneGame } from 'reducers/gameStore';
 import { addingSlug } from 'reducers/userStore';
 import { TextBox } from 'components/TextBox';
 import { StarLogo } from 'lib/StarLogo';
+import { NotFound } from 'components/NotFound';
 
 const Gallery = styled.div`
 width: 100%;
@@ -55,18 +56,15 @@ dispatch(fetchOneGame(slug))
   
   return(
     <Page>
-    <PageTitle>Game Detail</PageTitle>
-    {myGames && <StarButton onClick={handleLike} disabled={myGames.includes(slug)}>
+    <PageTitle>{game.name}</PageTitle>
+    {
+      game.slug && <div> {myGames && <StarButton onClick={handleLike} disabled={myGames.includes(slug)}>
      <StarLogo clicked={myGames.includes(slug)} /></StarButton>}
     <Banner>
     <div>
-        {game && <Text>{game.name}</Text>}
-    {!game && <Text>404 game not found</Text>}
-    {user.name && <Text>{user.name}</Text>}
-    {!user.name && <Text>please login</Text>}
-    <Text> {game.rating} </Text>
-     <Text> {game.released} </Text>
-     <Text>Comments</Text>
+    <Text>Rating: {game.rating}/5 </Text>
+     <Text>Released: {game.released} </Text>
+     <Text>Comments:</Text>
      {posts && posts.map((post)=>{
       return(
         <Text>{post.message}</Text>
@@ -84,7 +82,16 @@ dispatch(fetchOneGame(slug))
     })}
         
     </Gallery>
+      </div>
+    }
+    {
+      !game.slug && <NotFound />
+    }
 
     </Page>
   )
 }
+
+  //  {user.name && <Text>{user.name}</Text>}
+  //   {!user.name && <Text>please login</Text>}
+  //    {!game && <Text>404 game not found</Text>}

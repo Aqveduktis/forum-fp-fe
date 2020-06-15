@@ -66,7 +66,7 @@ export const fetchMessage = () => {
      })
      .catch((err)=>{
        console.log(err)
-       dispatch(messageStore.actions.setMessageStatus("a error"))
+       dispatch(messageStore.actions.setMessageStatus("could not fetch messages"))
        dispatch(userStore.actions.setLoading(false));
      })
 
@@ -98,7 +98,7 @@ export const postMessage = (user, message, game) => {
        
      })
      .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus(err))
+       dispatch(messageStore.actions.setMessageStatus("could not post message"))
         dispatch(userStore.actions.setLoading(false));
      })
 
@@ -123,13 +123,13 @@ export const likeMessage = ( message) => {
        }
      })
      .then(json=>{
-       dispatch(messageStore.actions.setMessageStatus("liked the message"))
+       dispatch(messageStore.actions.setMessageStatus(null))
        dispatch(messageStore.actions.changingMessage(json))
        dispatch(userStore.actions.setLoading(false));
        
      })
      .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus(err))
+       dispatch(messageStore.actions.setMessageStatus("could not like that message"))
         dispatch(userStore.actions.setLoading(false));
      })
 
@@ -162,40 +162,8 @@ export const deleteMessage = (message, user) => {
        
      })
      .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus(err))
+       dispatch(messageStore.actions.setMessageStatus("could not remove message"))
         dispatch(userStore.actions.setLoading(false));
      })
   }
 }
-
-//'/users/:id/messages
-
-// export const register = (name, password) =>{
-//   const REG_URL = 'http://localhost:8080/users'
-//   return(dispatch)=>{
-//     fetch(REG_URL, {
-//       method: 'POST',
-//       body: JSON.stringify({name, password}),
-//       headers: {'Content-Type':'application/json'}
-//     }).then(res=>{
-//       console.log(res.ok)
-//       if(res.ok){
-//         return res.json()
-//       }
-//       else{
-//         throw "could not register user"
-//       }
-//     })
-//     .then(json => {
-//       console.log(json)
-//       dispatch(userStore.actions.setStatusMessage(`created user, ${json.name}`))
-//     }
-
-//     )
-//     .catch((err)=>{
-//       dispatch(userStore.actions.setStatusMessage(err))
-//     }
-
-//     )
-//   }
-// }

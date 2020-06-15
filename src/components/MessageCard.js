@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom'
 import Moment from 'react-moment';
 import styled from 'styled-components'
 import { Card, Banner } from 'lib/containers';
-import { Text } from 'lib/text';
-import {Button} from 'lib/shared'
+import { Text, SmallLink } from 'lib/text';
 import { useDispatch } from 'react-redux';
 import { likeMessage } from 'reducers/messageStore';
 import {HeartLogo} from 'lib/HeartLogo'
@@ -41,11 +40,6 @@ const HeartButton = styled.button`
   }
 `
 
-const StarButton = styled.button`
-background: none;
-border: none;
-`
-
 
 export const MessageCard = ({ info }) => {
   const dispatch = useDispatch()
@@ -54,7 +48,7 @@ export const MessageCard = ({ info }) => {
   }
 	return (
     <Article>
-    <Link to={ (info.game !== 'general') ? `/games/${info.game}`  : '/games'}>{info.game}</Link>
+    <SmallLink to={ (info.game !== 'general') ? `/games/${info.game}`  : '/games'}>{info.game}</SmallLink>
     <Box>
     		<Text>{info.message}</Text>
 			<Text>{info.user.name}</Text>

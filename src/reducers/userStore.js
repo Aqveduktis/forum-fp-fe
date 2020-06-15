@@ -63,7 +63,6 @@ export const login = (name, password) => {
 			headers: { 'Content-Type': 'application/json' }
 		})
 			.then((res) => {
-				console.log(res.status);
 				if (res.ok) {
 					return res.json();
 				} else {
@@ -78,7 +77,7 @@ export const login = (name, password) => {
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoginMessage("there was an error login in"));
 				dispatch(userStore.actions.setLoading(false));
 			});
 	};
@@ -94,7 +93,6 @@ export const register = (name, password) => {
 			headers: { 'Content-Type': 'application/json' }
 		})
 			.then((res) => {
-				console.log(res.ok);
 				if (res.ok) {
 					return res.json();
 				} else {
@@ -107,7 +105,7 @@ export const register = (name, password) => {
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setRegisterMessage(err));
+				dispatch(userStore.actions.setRegisterMessage("there was an error registrating user"));
 				dispatch(userStore.actions.setLoading(false));
 			});
 	};
@@ -137,7 +135,7 @@ export const addingUser = (user) => {
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoginMessage("There was an error fetching data"));
 				dispatch(userStore.actions.setLoading(false));
 			});
 	};
@@ -165,7 +163,7 @@ export const addingSlug = (user, slug) => {
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoginMessage("there wass an error adding that game"));
 				dispatch(userStore.actions.setLoading(false));
 			});
 	};
@@ -205,7 +203,7 @@ export const deleteUser = (user) => {
 				dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(userStore.actions.setLoginMessage(err));
+				dispatch(userStore.actions.setLoginMessage("could not remove user"));
 				dispatch(userStore.actions.setLoading(false));
 			});
 	};

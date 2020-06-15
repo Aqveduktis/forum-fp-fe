@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { userStore, login } from 'reducers/userStore';
-import { Form, FormTitle, TextInput, Submit } from 'lib/shared';
+import { Form, FormTitle, TextInput, Submit } from 'lib/form';
 
 export const MyForm = ({ handleSubmit, info }) => {
 	const [ name, setName ] = useState('');
@@ -11,6 +11,8 @@ export const MyForm = ({ handleSubmit, info }) => {
 	const handleForm = (event) => {
 		event.preventDefault();
 		handleSubmit(name, password);
+    setPassword("")
+    setName("")
 	};
 
 	return (

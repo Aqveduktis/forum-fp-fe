@@ -1,42 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import {Submit} from 'lib/shared'
 import { useSelector, useDispatch } from 'react-redux'
+import {Link} from 'react-router-dom'
+import {Border, Label, Input, Submit} from 'lib/form'
+import {Text, NormalLink} from 'lib/text'
 import {postMessage} from 'reducers/messageStore'
-
-const Border = styled.form`
-background-color: unset;
-border: 1px solid white;
-width: 300px;
-max-width: 100%;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-`
-const Input = styled.textarea`
-width: 90%;
-height: 50px;
-margin 10px auto;
-color: white;
-border: none;
-border-bottom: 2px solid white;
-background: unset;
-&::focus {
-  border: 1px solid green;
-}
-`
-const Wrapper = styled.div`
-width: 90%;
-margin: 0 auto;
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-`
-const Label = styled.label`
-color: white;
-text-width: bold;
-`
 
 
 export const TextBox = ({slug}) => {
@@ -51,11 +19,24 @@ export const TextBox = ({slug}) => {
 	};
 
   return(
+    <div>
+    {user.name && 
     <Border onSubmit={handleSubmit}>
     <Label for="textbox">Write your message</Label>
     <Input id="textbox" value={text} onChange={(e)=>setText(e.target.value)} />
     <Submit type="submit">Submit</Submit>
    
     </Border>
+    }
+    {!user.name &&
+    <div>
+    <Text>Please login to write messages</Text>
+    <NormalLink to='/user'>Login Page</NormalLink>
+    </div>
+     }
+    
+    </div>
+
+
   )
 }

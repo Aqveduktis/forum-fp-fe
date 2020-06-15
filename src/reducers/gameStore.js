@@ -38,7 +38,6 @@ export const fetchGames = () => {
     dispatch(gameStore.actions.setFetchingStatus("fetching all games"))
 		fetch(GAMES_URL)
     .then((res) => {
-				console.log(res.ok);
 				if (res.ok) {
 					return res.json();
 				} else {
@@ -52,7 +51,7 @@ export const fetchGames = () => {
         dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(gameStore.actions.setFetchingStatus(err))
+				dispatch(gameStore.actions.setFetchingStatus("could not fetch the games"))
         dispatch(userStore.actions.setLoading(false));
 			});
 
@@ -66,7 +65,6 @@ export const fetchOneGame = (slug) => {
     dispatch(gameStore.actions.setFetchingStatus(`fetching game ${slug}`))
 		fetch(GAMES_URL)
     .then((res) => {
-				console.log(res.ok);
 				if (res.ok) {
 					return res.json();
 				} else {
@@ -80,29 +78,10 @@ export const fetchOneGame = (slug) => {
         dispatch(userStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(gameStore.actions.setFetchingStatus(err))
+				dispatch(gameStore.actions.setFetchingStatus("could not fetch game"))
        dispatch(gameStore.actions.setGame({}));
         dispatch(userStore.actions.setLoading(false));
 			});
 
 	};
 };
-
-
-// .then((res) => {
-// 				console.log(res.ok);
-// 				if (res.ok) {
-// 					return res.json();
-// 				} else {
-// 					throw 'could not register user';
-// 				}
-// 			})
-// 			.then((json) => {
-// 				console.log(json);
-//         dispatch(userStore.actions.setRegisterMessage(`created user, ${json.name}`))
-//         dispatch(userStore.actions.setLoading(false));
-// 			})
-// 			.catch((err) => {
-// 				dispatch(userStore.actions.setRegisterMessage(err));
-//         dispatch(userStore.actions.setLoading(false));
-// 			});

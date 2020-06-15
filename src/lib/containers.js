@@ -45,3 +45,12 @@ align-items: center;
 }
 `
 
+export const LinkNav = styled.nav`
+margin: 10px 0;
+
+.active {
+  color: #bc7a94;
+  border-color: #bc7a94;
+}
+`
+

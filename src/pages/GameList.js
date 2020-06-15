@@ -4,8 +4,15 @@ import {gameStore, fetchGames} from '../reducers/gameStore'
 import { Games } from 'components/Games'
 import { Page } from 'lib/containers'
 import { PageTitle } from 'lib/text'
+import { GameCard } from '../components/GameCard'
+import { Wrapper } from 'lib/containers'
+import {Text} from 'lib/text'
+import { NotFound } from 'components/NotFound'
 
 export const GameList = () => {
+     const games = useSelector((store)=>store.gameStore.gameList)
+console.log("games", games)
+
 const dispatch = useDispatch()
 useEffect(()=>{
   dispatch(fetchGames())
@@ -16,7 +23,14 @@ useEffect(()=>{
   return(
     <Page>
     <PageTitle>Games</PageTitle>
-      <Games />
+    {games && <Wrapper>{
+            games.map((game)=>{
+      return(<GameCard info={game} />)
+    })
+    }
+     </Wrapper>}
+    {!games.length && <NotFound />}
+   
     </Page>
 
   )

@@ -7,6 +7,7 @@ import { Card, Wrapper } from 'lib/containers';
 import { Frame, Submit } from 'lib/shared';
 import { MessageCard } from './MessageCard';
 import { TextBox } from './TextBox';
+import { NotFound } from './NotFound';
 
 export const Home = () => {
 	const dispatch = useDispatch();
@@ -27,12 +28,16 @@ export const Home = () => {
 	return (
 		<Page>
 			<PageTitle>Start Page</PageTitle>
-			<Wrapper>
-				{messages && messages.map((message) => {
+      {messages && <Wrapper>
+      			{ messages.map((message) => {
 					return <MessageCard info={message} />;
 				})}
-       {!messages.length && <Text>404 no messages</Text>} 
+       
 			</Wrapper>
+      }
+      {!messages.length && <NotFound />} 
+		
+	
       <TextBox slug="general" />
 		</Page>
 	);
