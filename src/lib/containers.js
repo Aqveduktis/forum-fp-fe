@@ -1,68 +1,104 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 //#1F2933;
 export const Box = styled.div`
-background-color: #1F2933;
-width: 95vw;
-margin: 0 auto;
+	background-color: #1f2933;
+	width: 95vw;
+	margin: 0 auto;
 
-@media (min-width: 1200px) {
-  width: 1080px;
-}
-`
+	@media (min-width: 1200px) {
+		width: 1080px;
+	}
+`;
 
-export const Page = styled.section`
-padding: 1.0em;
-
-`
+export const Page = styled.section`padding: 1.0em;`;
 
 export const Wrapper = styled.section`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-align-items: center;
-`
-
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+`;
 
 export const Card = styled.article`
-  background-color: #486581;
-  color: white;
-  max-width: 300px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`
+	background-color: #486581;
+	color: white;
+	max-width: 300px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+`;
 export const Banner = styled.div`
-width: 95%;
-margin: 0 auto;
-display:flex;
-flex-wrap: nowrap; 
-justify-content: space-between;
-align-items: center; 
-@media (max-width: 576px) {
-  flex-wrap: wrap;
-}
-`
+	width: 95%;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	@media (max-width: 576px) {
+		flex-wrap: wrap;
+	}
+`;
 
 export const LinkNav = styled.nav`
-margin: 10px 0;
+	margin: 10px 0;
 
-.active {
-  color: #bc7a94;
-  border-color: #bc7a94;
-}
-`
+	.active {
+		color: #bc7a94;
+		border-color: #bc7a94;
+	}
+`;
 export const Gallery = styled.div`
-width: 100%;
-display: flex;
-flex-wrap: wrap;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
 
-img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border: 5px solid black;
+	img {
+		width: 150px;
+		height: 150px;
+		object-fit: cover;
+		border: 5px solid black;
+	}
+`;
+
+export const CardLink = styled(Link)`
+width: 30%;
+text-decoration: none;
+@media (max-width: 576px) {
+  width: 100%;
 }
-`
+`;
+export const Article = styled.article`
+	width: 100%;
+	background-color: darkslategray;
+	color: white;
 
+	img {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+	}
+	h2 {
+		text-align: center;
+		height: 100px;
+	}
+`;
+export const PictureBox = styled.div`
+	width: 100px;
+	max-width: 33vw;
+	height: 100px;
+	background: ${(props) => `url(${props.background})` || 'darkslategray'};
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	p {
+		color: silver;
+		font-size: 1.2em;
+		text-align: center;
+		text-shadow: 1px solid black;
+	}
+`;

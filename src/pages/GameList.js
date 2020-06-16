@@ -1,37 +1,51 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {gameStore, fetchGames} from '../reducers/gameStore'
-import { Games } from 'components/Games'
-import { Page } from 'lib/containers'
-import { PageTitle } from 'lib/text'
-import { GameCard } from '../components/GameCard'
-import { Wrapper } from 'lib/containers'
-import {Text} from 'lib/text'
-import { NotFound } from 'components/NotFound'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { gameStore, fetchGames } from '../reducers/gameStore';
+import { Page } from 'lib/containers';
+import { PageTitle } from 'lib/text';
+import { GameCard } from '../components/GameCard';
+import { Wrapper } from 'lib/containers';
+import { SelectWrapper, Select } from 'lib/form';
+import { NotFound } from 'components/NotFound';
 
 export const GameList = () => {
-     const games = useSelector((store)=>store.gameStore.gameList)
-console.log("games", games)
+	const [ genre, setGenre ] = useState('');
 
-const dispatch = useDispatch()
-useEffect(()=>{
-  dispatch(fetchGames())
-},[])
+	const games = useSelector((store) =>
+		store.gameStore.gameList.filter((game) => {
+			return game.genres.find((item) => item.slug.includes(genre));
+		})
+	);
+	console.log('games', games);
 
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchGames());
+	}, []);
 
-
-  return(
-    <Page>
-    <PageTitle>Games</PageTitle>
-    {games && <Wrapper>{
-            games.map((game)=>{
-      return(<GameCard info={game} />)
-    })
-    }
-     </Wrapper>}
-    {!games.length && <NotFound />}
-   
-    </Page>
-
-  )
-}
+	return (
+		<Page>
+			<PageTitle>Games</PageTitle>
+			<div>
+				<SelectWrapper>
+					<Select value={genre} onChange={(e) => setGenre(e.target.value)}>
+						<option value="">All</option>
+						<option value="action">Action</option>
+						<option value="adventure">Adventure</option>
+						<option value="indie">Indie</option>
+						<option value="puzzle">Puzzle</option>
+						<option value="shooter">Shooter</option>
+					</Select>
+				</SelectWrapper>
+			</div>
+			{games && (
+				<Wrapper>
+					{games.map((game) => {
+						return <GameCard info={game} />;
+					})}
+				</Wrapper>
+			)}
+			{!games.length && <NotFound />}
+		</Page>
+	);
+};
