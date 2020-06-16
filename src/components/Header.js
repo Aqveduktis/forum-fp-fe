@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
  import Loader from 'react-loader-spinner'
 import styled, {keyframes} from 'styled-components';
 import { Title, Text, StyledLink, Loading } from 'lib/text';
-import { Banner, LinkNav } from 'lib/containers';
+import { Banner, LinkNav, TopBanner } from 'lib/containers';
 import { UserLogo } from 'lib/UserLogo';
 
 const Wrapper = styled.div`
@@ -18,13 +18,12 @@ export const Header = () => {
 	const name = useSelector((state)=>state.userStore.user.name)
 	return (
 		<>
-    <Banner>
-      <Title to="/">My Forum</Title>
+    <TopBanner>
+          <Title to="/">My Forum</Title>
 			<Wrapper><UserLogo size={100} /><Text>{ name ? name : "please login"}</Text></Wrapper>
-			
-    </Banner>
-		<Banner>
-		<LinkNav>
+    </TopBanner>
+    <TopBanner>
+    		<LinkNav>
 				<StyledLink to="/user">User</StyledLink>
 				<StyledLink to="/games">About</StyledLink>
 			</LinkNav>
@@ -35,7 +34,7 @@ export const Header = () => {
          width={75}
  
       />}
-    </Banner>
+    </TopBanner>
 		</>
 	);
 };

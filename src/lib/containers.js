@@ -13,7 +13,20 @@ export const Box = styled.div`
 
 export const Page = styled.section`padding: 1.0em;`;
 
-export const Wrapper = styled.section`
+export const TopBanner = styled.section`
+padding: 1.0em;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+	@media (max-width: 576px) {
+		flex-direction: column;
+    justify-content: center;
+	}
+`
+
+
+export const Wrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -21,17 +34,16 @@ export const Wrapper = styled.section`
 `;
 
 export const Card = styled.article`
-	background-color: #486581;
-	color: white;
-	max-width: 300px;
-	margin: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-`;
+  width: 300px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 export const Banner = styled.div`
-	width: 95%;
+	width: 100%;
 	margin: 0 auto;
 	display: flex;
 	flex-wrap: nowrap;
@@ -96,9 +108,11 @@ export const PictureBox = styled.div`
 	justify-content: center;
 	align-items: center;
 	p {
-		color: silver;
+		color: white;
+    background-color: black;
+    opacity: 0.7;
 		font-size: 1.2em;
 		text-align: center;
-		text-shadow: 1px solid black;
+		text-shadow: 1px 1px black;
 	}
 `;

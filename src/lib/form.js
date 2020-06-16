@@ -38,7 +38,7 @@ export const Border = styled.form`
 	background-color: unset;
 	border: 1px solid white;
 	width: 300px;
-	max-width: 100%;
+	max-width: 90%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;

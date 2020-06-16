@@ -10,6 +10,14 @@ color: black;
 border: none;
 border-radius: 5px;
 `
+export const SmallButton=styled.button`
+background: none;
+border: none;
+padding: 0;
+color: crimson;
+font-size: 1.0em;
+cursor: pointer;
+`
 
 
 export const CheckBoxWrapper = styled.div`

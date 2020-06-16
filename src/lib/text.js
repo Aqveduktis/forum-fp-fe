@@ -6,11 +6,23 @@ color: ${props=> props.color ||"white"};
 font-size: ${props=> props.size ||"1.0"}em;
 
 `
+export const Disclaimer = styled.p`
+color: gray;
+
+a {
+  color: gray;
+  text-decoration: none;
+  &:hover {
+    color: thistle;
+  }
+}
+`
+
 
 export const PageTitle = styled.h2`
 margin: 10px;
-color: lightgray;
-font-size: 1.5em;
+color: #c4a747;
+font-size: 1.8em;
 
 `
 export const Title = styled(Link)`

@@ -51,7 +51,7 @@ export const GameDetails = () => {
 							)}
 							<Text>Rating: {game.rating}/5 </Text>
 							<Text>Released: {game.released} </Text>
-							<Text>Genres:</Text>
+							<Text size={1.3}>Genres:</Text>
 							<Gallery>
 								{game.genres.map((genre) => (
 									<PictureBox background={genre.image_background}>
@@ -59,7 +59,7 @@ export const GameDetails = () => {
 									</PictureBox>
 								))}
 							</Gallery>
-							<Text>Comments:</Text>
+							<Text size={1.3}>Comments:</Text>
 							{posts &&
 								posts.map((post) => {
 									return (

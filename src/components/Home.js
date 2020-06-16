@@ -11,8 +11,6 @@ import { NotFound } from './NotFound';
 export const Home = () => {
 	const dispatch = useDispatch();
 	const messages = useSelector((state) => state.messageStore.messageList);
-	const user = useSelector((state) => state.userStore.user);
-	const slug = 'general';
 
 	useEffect(() => {
 		dispatch(fetchMessage());
