@@ -6,11 +6,13 @@ import { userStore } from './reducers/userStore';
 import { gameStore } from './reducers/gameStore';
 import { messageStore } from './reducers/messageStore';
 import { HomePage } from 'pages/HomePage';
+import { statusStore } from 'reducers/statusStore';
 
 const reducer = combineReducers({
 	userStore: userStore.reducer,
 	gameStore: gameStore.reducer,
-	messageStore: messageStore.reducer
+	messageStore: messageStore.reducer,
+  statusStore: statusStore.reducer
 });
 //const store = configureStore({ reducer });
 

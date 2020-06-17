@@ -3,16 +3,12 @@ import { useSelector } from 'react-redux';
 import { Text } from 'lib/text';
 
 export const StatusMessages = () => {
-	const loginText = useSelector((state) => state.userStore.loginMessage);
-	const registerText = useSelector((state) => state.userStore.registerMessage);
-	const gameText = useSelector((state) => state.gameStore.fetchingStatus);
-	const messageText = useSelector((state) => state.messageStore.messageStatus);
+  const errorMessage = useSelector((state)=>state.statusStore.errorMessage)
+  const statusMessage = useSelector((state)=>state.statusStore.statusMessage)
 	return (
 		<div>
-		<Text>{loginText}</Text>
-			<Text>{registerText}</Text>
-			<Text>{gameText}</Text>
-      <Text>{messageText}</Text>
+		<Text color="palevioletred">{errorMessage}</Text>
+			<Text color="palegreen">{statusMessage}</Text>
 		</div>
 	);
 };

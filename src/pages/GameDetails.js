@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
-import { Button } from 'lib/shared';
 import { PageTitle, Text } from 'lib/text';
 import { useSelector, useDispatch } from 'react-redux';
-import { postMessage } from 'reducers/messageStore';
 import { fetchOneGame } from 'reducers/gameStore';
-import { changingSlug } from 'reducers/userStore';
+import { favoritingGames } from 'reducers/userStore';
 import { TextBox } from 'components/TextBox';
 import { StarLogo } from 'lib/StarLogo';
 import { NotFound } from 'components/NotFound';
@@ -34,7 +32,7 @@ export const GameDetails = () => {
 	);
 
 	const handleLike = () => {
-		dispatch(changingSlug(user, slug));
+    dispatch(favoritingGames(user, slug))
 	};
 
 	return (

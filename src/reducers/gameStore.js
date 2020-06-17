@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userStore } from './userStore';
+import { statusStore } from './statusStore';
 
 const initialState = {
 	gameList: [],
 	selectedGame: {},
-	fetchingStatus: null
 };
 
 export const gameStore = createSlice({
@@ -19,39 +18,31 @@ export const gameStore = createSlice({
 			const gameInfo = action.payload;
 			state.selectedGame = gameInfo;
 		},
-		setFetchingStatus: (state, action) => {
-			state.fetchingStatus = action.payload;
-		},
-		newMessage: (state, action) => {
-			const { message } = action.payload;
-			const newList = state.messageList;
-			newList.push({ message });
-			state.messageList = newList;
-		}
+
 	}
 });
 export const fetchGames = () => {
 	const GAMES_URL = 'http://localhost:8080/games';
 	return (dispatch) => {
-		dispatch(userStore.actions.setLoading(true));
-		dispatch(gameStore.actions.setFetchingStatus('fetching all games'));
+		dispatch(statusStore.actions.setLoading(true));
 		fetch(GAMES_URL)
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw 'could not fetch games';
+					throw `error was ${res.status}`;
 				}
 			})
 			.then((json) => {
-				console.log(json);
-				dispatch(gameStore.actions.setFetchingStatus(null));
 				dispatch(gameStore.actions.addingGames(json));
-				dispatch(userStore.actions.setLoading(false));
+        dispatch(statusStore.actions.setErrorMessage(null))
+        dispatch(statusStore.actions.setStatusMessage(null))
+				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(gameStore.actions.setFetchingStatus('could not fetch the games'));
-				dispatch(userStore.actions.setLoading(false));
+        console.log("error", err)
+				dispatch(statusStore.actions.setErrorMessage('could not fetch the games'));
+				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
 };
@@ -59,26 +50,26 @@ export const fetchGames = () => {
 export const fetchOneGame = (slug) => {
 	const GAMES_URL = `http://localhost:8080/games/${slug}`;
 	return (dispatch) => {
-		dispatch(userStore.actions.setLoading(true));
-		dispatch(gameStore.actions.setFetchingStatus(`fetching game ${slug}`));
+		dispatch(statusStore.actions.setLoading(true));
 		fetch(GAMES_URL)
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw 'could not fetch games';
+					throw `error was ${res.status}`;
 				}
 			})
 			.then((json) => {
-				console.log(json);
-				dispatch(gameStore.actions.setFetchingStatus(null));
 				dispatch(gameStore.actions.setGame(json));
-				dispatch(userStore.actions.setLoading(false));
+        dispatch(statusStore.actions.setErrorMessage(null))
+				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-				dispatch(gameStore.actions.setFetchingStatus('could not fetch game'));
+        console.log("error", err)
+        dispatch(statusStore.actions.setErrorMessage('could not fetch game'))
+        dispatch(statusStore.actions.setStatusMessage(null))
 				dispatch(gameStore.actions.setGame({}));
-				dispatch(userStore.actions.setLoading(false));
+				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
 };

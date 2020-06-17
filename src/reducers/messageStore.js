@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userStore } from './userStore';
+import {statusStore} from 'reducers/statusStore'
+import {userStore} from 'reducers/userStore'
 
 const initialState = {
   messageList: [],
-  messageStatus: null 
 };
 
 export const messageStore = createSlice({
   name: 'messageStore',
   initialState,
   reducers: {
-setMessageStatus: (state, action) => {
-  state.messageStatus = action.payload
-},
+
 addingMessages: (state, action) => {
       const  messages  = action.payload;
       state.messageList = messages
@@ -47,27 +45,27 @@ removeMessage: (state, action) => {
 export const fetchMessage = () => {
   const URL = `http://localhost:8080/messages`
   return dispatch =>{
-    dispatch(userStore.actions.setLoading(true))
-    dispatch(messageStore.actions.setMessageStatus("trying to fetch all messages"))
+    dispatch(statusStore.actions.setLoading(true))
        fetch(URL)
      .then(res=>{
        if(res.ok){
          return res.json()
        }
        else{
-         throw "could not fetch messages"
+         throw `error was ${res.status}`
        }
      })
      .then(json=>{
        dispatch(messageStore.actions.addingMessages(json))
-       dispatch(messageStore.actions.setMessageStatus(null))
-       dispatch(userStore.actions.setLoading(false));
+       dispatch(statusStore.actions.setStatusMessage(null))
+       dispatch(statusStore.actions.setErrorMessage(null))
+       dispatch(statusStore.actions.setLoading(false));
        console.log(json)
      })
      .catch((err)=>{
        console.log(err)
        dispatch(messageStore.actions.setMessageStatus("could not fetch messages"))
-       dispatch(userStore.actions.setLoading(false));
+       dispatch(statusStore.actions.setLoading(false))
      })
 
   }
@@ -75,8 +73,7 @@ export const fetchMessage = () => {
 export const postMessage = (user, message, game) => {
   const URL = `http://localhost:8080/messages`
   return dispatch =>{
-    dispatch(userStore.actions.setLoading(true));
-    dispatch(messageStore.actions.setMessageStatus("trying to post a message"))
+  dispatch(statusStore.actions.setLoading(true))
        fetch(URL, {
        method: 'POST',
        body: JSON.stringify({message, game}),
@@ -87,19 +84,21 @@ export const postMessage = (user, message, game) => {
          return res.json()
        }
        else{
-         throw "could not post message"
+         throw `error was ${res.status}`
        }
      })
      .then(json=>{
-       dispatch(messageStore.actions.setMessageStatus(null))
        dispatch(messageStore.actions.newMessage(json))
        dispatch(userStore.actions.addingOneMessage(json));
-       dispatch(userStore.actions.setLoading(false));
+        dispatch(statusStore.actions.setStatusMessage(null))
+       dispatch(statusStore.actions.setErrorMessage(null))
+       dispatch(statusStore.actions.setLoading(false));
        
      })
      .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus("could not post message"))
-        dispatch(userStore.actions.setLoading(false));
+       console.log("error", err)
+       dispatch(messageStore.actions.setErrorMessage("could not post message"))
+        dispatch(statusStore.actions.setLoading(false));
      })
 
   }
@@ -108,8 +107,7 @@ export const postMessage = (user, message, game) => {
 export const likeMessage = ( message) => {
   const URL = `http://localhost:8080/messages/${message._id}/like`
   return dispatch =>{
-    dispatch(userStore.actions.setLoading(true));
-    dispatch(messageStore.actions.setMessageStatus("trying to like a message"))
+    dispatch(statusStore.actions.setLoading(true));
        fetch(URL, {
        method: 'PUT',
        headers: {'Content-Type':'application/json' }
@@ -119,18 +117,20 @@ export const likeMessage = ( message) => {
          return res.json()
        }
        else{
-         throw "could not like message"
+         throw `error was ${res.status}`
        }
      })
      .then(json=>{
-       dispatch(messageStore.actions.setMessageStatus(null))
        dispatch(messageStore.actions.changingMessage(json))
-       dispatch(userStore.actions.setLoading(false));
+       dispatch(statusStore.actions.setStatusMessage("liked a message"))
+       dispatch(messageStore.actions.setErrorMessage(null))
+       dispatch(statusStore.actions.setLoading(false));
        
      })
      .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus("could not like that message"))
-        dispatch(userStore.actions.setLoading(false));
+       console.log("error", err)
+       dispatch(statusStore.actions.setErrorMessage("could not like that message"))
+        dispatch(statusStore.actions.setLoading(false));
      })
 
   }
@@ -139,8 +139,7 @@ export const likeMessage = ( message) => {
 export const deleteMessage = (message, user) => {
   const URL = `http://localhost:8080/messages/${message._id}`
   return dispatch => {
-    dispatch(userStore.actions.setLoading(true));
-    dispatch(messageStore.actions.setMessageStatus("trying to remove a message"))
+    dispatch(statusStore.actions.setLoading(true));
     fetch(URL, {
        method: 'DELETE',
        headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}` }
@@ -150,20 +149,21 @@ export const deleteMessage = (message, user) => {
          return res.json()
        }
        else{
-         throw "could not remove message"
+         throw `error was ${res.status}`
        }
      })
      .then(json=>{
-       console.log("removing", json)
-       dispatch(messageStore.actions.setMessageStatus("removed the message"))
+       dispatch(statusStore.actions.setStatusMessage("removed the message"))
+       dispatch(statusStore.actions.setErrorMessage(null))
        dispatch(messageStore.actions.removeMessage(message))
        dispatch(userStore.actions.removeMessage(message))
-       dispatch(userStore.actions.setLoading(false));
+       dispatch(statusStore.actions.setLoading(false));
        
      })
      .catch((err) => {
-       dispatch(messageStore.actions.setMessageStatus("could not remove message"))
-        dispatch(userStore.actions.setLoading(false));
+        console.log("error", err)
+        dispatch(statusStore.actions.setErrorMessage("could not remove message"))
+        dispatch(statusStore.actions.setLoading(false));
      })
   }
 }

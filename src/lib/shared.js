@@ -63,3 +63,9 @@ export const CheckBox = styled.input`
     }
   }
 `;
+export const Image = styled.img`
+  width: 400px;
+  haight: 400px;
+  object-fit: cover;
+
+`

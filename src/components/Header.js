@@ -14,7 +14,7 @@ align-items: center;
 
 `
 export const Header = () => {
-	const isLoading = useSelector((state)=>state.userStore.isLoading)
+	const isLoading = useSelector((state)=>state.statusStore.isLoading)
 	const name = useSelector((state)=>state.userStore.user.name)
 	return (
 		<>
@@ -29,7 +29,7 @@ export const Header = () => {
 			</LinkNav>
 			{isLoading && <Loader
          type="ThreeDots"
-         color="#00BFFF"
+         color="silver"
          height={75}
          width={75}
  
