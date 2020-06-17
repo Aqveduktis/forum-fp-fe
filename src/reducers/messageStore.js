@@ -38,7 +38,7 @@ export const messageStore = createSlice({
 });
 
 export const fetchMessage = () => {
-	const URL = `http://localhost:8080/messages`;
+	const URL = `https://aqveduktis-final-project.herokuapp.com/messages`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(URL)
@@ -64,7 +64,7 @@ export const fetchMessage = () => {
 	};
 };
 export const postMessage = (user, message, game) => {
-	const URL = `http://localhost:8080/messages`;
+	const URL = `https://aqveduktis-final-project.herokuapp.com/messages`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(URL, {
@@ -94,11 +94,11 @@ export const postMessage = (user, message, game) => {
 };
 
 export const likeMessage = (message) => {
-	const URL = `http://localhost:8080/messages/${message._id}/like`;
+	const URL = `https://aqveduktis-final-project.herokuapp.com/messages/${message._id}/like`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(URL, {
-			method: 'PUT',
+			method: 'POST',
 			headers: { 'Content-Type': 'application/json' }
 		})
 			.then((res) => {
@@ -123,7 +123,7 @@ export const likeMessage = (message) => {
 };
 
 export const deleteMessage = (message, user) => {
-	const URL = `http://localhost:8080/messages/${message._id}`;
+	const URL = `https://aqveduktis-final-project.herokuapp.com/messages/${message._id}`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(URL, {

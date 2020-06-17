@@ -22,7 +22,7 @@ export const gameStore = createSlice({
 	}
 });
 export const fetchGames = () => {
-	const GAMES_URL = 'http://localhost:8080/games';
+	const GAMES_URL = 'https://aqveduktis-final-project.herokuapp.com/games';
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(GAMES_URL)
@@ -48,7 +48,7 @@ export const fetchGames = () => {
 };
 
 export const fetchOneGame = (slug) => {
-	const GAMES_URL = `http://localhost:8080/games/${slug}`;
+	const GAMES_URL = `https://aqveduktis-final-project.herokuapp.com/games/${slug}`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(GAMES_URL)

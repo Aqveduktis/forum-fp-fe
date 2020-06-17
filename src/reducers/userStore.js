@@ -45,7 +45,7 @@ export const userStore = createSlice({
 });
 
 export const login = (name, password) => {
-	const LOGIN_URL = 'http://localhost:8080/sessions';
+	const LOGIN_URL = 'https://aqveduktis-final-project.herokuapp.com/sessions';
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(LOGIN_URL, {
@@ -72,7 +72,7 @@ export const login = (name, password) => {
 	};
 };
 export const register = (name, password) => {
-	const REG_URL = 'http://localhost:8080/users';
+	const REG_URL = 'https://aqveduktis-final-project.herokuapp.com/users';
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
@@ -101,7 +101,7 @@ export const register = (name, password) => {
 };
 
 export const addingUser = (user) => {
-	const REG_URL = `http://localhost:8080/users/${user.id}`;
+	const REG_URL = `https://aqveduktis-final-project.herokuapp.com/users/${user.id}`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
@@ -131,7 +131,7 @@ export const addingUser = (user) => {
 };
 
 export const favoritingGames = (user, slug) => {
-	const REG_URL = `http://localhost:8080/users/${user.id}/${slug}`;
+	const REG_URL = `https://aqveduktis-final-project.herokuapp.com/users/${user.id}/${slug}`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
@@ -168,7 +168,7 @@ export const logout = () => {
 };
 
 export const deleteUser = (user) => {
-	const REG_URL = `http://localhost:8080/users/${user.id}`;
+	const REG_URL = `https://aqveduktis-final-project.herokuapp.com/users/${user.id}`;
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
