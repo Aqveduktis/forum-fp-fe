@@ -11,6 +11,7 @@ import { NotFound } from './NotFound';
 export const Home = () => {
 	const dispatch = useDispatch();
 	const messages = useSelector((state) => state.messageStore.messageList);
+	const loading = useSelector((state) => state.statusStore.isLoading);
 
 	useEffect(() => {
 		dispatch(fetchMessage());
@@ -19,17 +20,16 @@ export const Home = () => {
 	return (
 		<Page>
 			<PageTitle>Start Page</PageTitle>
-      {messages && <Wrapper>
-      			{ messages.map((message) => {
-					return <MessageCard info={message} />;
-				})}
-       
-			</Wrapper>
-      }
-      {!messages.length && <NotFound />} 
-		
-	
-      <TextBox slug="general" />
+			{messages && (
+				<Wrapper>
+					{messages.map((message) => {
+						return <MessageCard info={message} />;
+					})}
+				</Wrapper>
+			)}
+			{!messages.length && !loading && <NotFound />}
+
+			<TextBox slug="general" />
 		</Page>
 	);
 };

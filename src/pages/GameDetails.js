@@ -21,6 +21,7 @@ export const GameDetails = () => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userStore.user);
 	const posts = useSelector((state) => state.messageStore.messageList.filter((item) => item.game == slug));
+	const loading = useSelector((state) => state.statusStore.isLoading);
 	const game = useSelector((state) => state.gameStore.selectedGame);
 	const myGames = useSelector((state) => state.userStore.games);
 	//const postMessage
@@ -32,7 +33,7 @@ export const GameDetails = () => {
 	);
 
 	const handleLike = () => {
-    dispatch(favoritingGames(user, slug))
+		dispatch(favoritingGames(user, slug));
 	};
 
 	return (
@@ -78,7 +79,7 @@ export const GameDetails = () => {
 					</Gallery>
 				</div>
 			)}
-			{!game.slug && <NotFound />}
+			{!game.slug && !loading && <NotFound />}
 		</Page>
 	);
 };

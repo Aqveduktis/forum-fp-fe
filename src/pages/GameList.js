@@ -10,7 +10,7 @@ import { NotFound } from 'components/NotFound';
 
 export const GameList = () => {
 	const [ genre, setGenre ] = useState('');
-
+	const loading = useSelector((state) => state.statusStore.isLoading);
 	const games = useSelector((store) =>
 		store.gameStore.gameList.filter((game) => {
 			return game.genres.find((item) => item.slug.includes(genre));
@@ -45,7 +45,7 @@ export const GameList = () => {
 					})}
 				</Wrapper>
 			)}
-			{!games.length && <NotFound />}
+			{!games.length && !loading && <NotFound />}
 		</Page>
 	);
 };
