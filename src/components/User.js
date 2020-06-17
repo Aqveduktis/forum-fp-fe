@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { Button, SmallButton } from 'lib/shared'
+import { Button, SmallButton, Triangle } from 'lib/shared'
 import { Text, SmallLink } from 'lib/text'
 import {logout, addingUser, deleteUser} from '../reducers/userStore'
 import { deleteMessage } from 'reducers/messageStore'
-import { useHistory } from 'react-router'
-import { Gallery, Banner, Card, Wrapper } from 'lib/containers'
+import { Banner, Card } from 'lib/containers'
 import { Warning } from 'lib/Warning'
 
-const Triangle = styled.button`
-background: none;
-border: none;
-cursor: pointer;
-&: hover {
-  opacity: 0.3;
-}
 
-p {
-  color: yellow;
-  margin: 0;
-}
-
-`
 
 
 export const User = ({user}) => {
   const myMessages = useSelector((state)=>state.userStore.messages)
   const myGames = useSelector((state)=>state.userStore.games)
-  const history = useHistory()
   console.log("games", myGames)
   const dispatch = useDispatch()
   useEffect(()=>{

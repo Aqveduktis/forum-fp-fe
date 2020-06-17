@@ -1,7 +1,4 @@
-import React from 'react'
 import styled from 'styled-components'
-import { NavLink, Link } from 'react-router-dom';
-
 
 export const Button = styled.button`
 padding: 10px 20px;
@@ -9,6 +6,25 @@ background-color: #bb86fc;
 color: black;
 border: none;
 border-radius: 5px;
+`
+export const HeartButton = styled.button`
+  background: none;
+  border: none;
+	width: ${(props) => props.width*1.5 || 150}px;
+	height: ${(props) => props.width || 100}px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  svg {
+		fill: ${(props) => props.color || 'white'};
+		width: 50%;
+    height: 100%;
+	}
+  p {
+    color: ${(props) => props.color || 'white'};
+    font-size: ${(props) => props.width*0.3 || 50}px;
+  }
 `
 export const SmallButton=styled.button`
 background: none;
@@ -18,7 +34,25 @@ color: crimson;
 font-size: 1.0em;
 cursor: pointer;
 `
+export const Triangle = styled.button`
+background: none;
+border: none;
+cursor: pointer;
+&: hover {
+  opacity: 0.3;
+}
 
+p {
+  color: yellow;
+  margin: 0;
+}
+
+`
+export const StarButton = styled.button`
+	background: none;
+	border: none;
+	cursor: pointer;
+`;
 
 export const CheckBoxWrapper = styled.div`
   position: relative;

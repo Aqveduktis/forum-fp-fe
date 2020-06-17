@@ -116,3 +116,22 @@ export const PictureBox = styled.div`
 		text-shadow: 1px 1px black;
 	}
 `;
+
+export const BigBox = styled.article`
+width: 300px;
+max-width: 100%;
+margin: 10px 0;
+border: 1px solid gray;
+p {
+  margin: 8px 16px;
+}
+a {
+  margin: 8px 16px;
+}
+`
+export const SmallBox = styled.div`
+width: 100%;
+box-sizing: border-box;
+border-top: 1px solid gray;
+border-bottom: 1px solid gray;
+`

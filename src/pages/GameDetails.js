@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
 import { PageTitle, Text } from 'lib/text';
+import {StarButton} from 'lib/shared'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchOneGame } from 'reducers/gameStore';
 import { favoritingGames } from 'reducers/userStore';
@@ -10,11 +10,6 @@ import { TextBox } from 'components/TextBox';
 import { StarLogo } from 'lib/StarLogo';
 import { NotFound } from 'components/NotFound';
 
-const StarButton = styled.button`
-	background: none;
-	border: none;
-	cursor: pointer;
-`;
 
 export const GameDetails = () => {
 	const { slug } = useParams();

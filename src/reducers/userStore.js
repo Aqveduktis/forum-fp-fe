@@ -62,7 +62,6 @@ export const login = (name, password) => {
 			})
 			.then((json) => {
 				dispatch(userStore.actions.loginUser({ name: name, id: json.userId, accessToken: json.accessToken }));
-        dispatch(statusStore.actions.setErrorMessage(null))
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
@@ -90,8 +89,8 @@ export const register = (name, password) => {
 			})
 			.then((json) => {
 				dispatch(statusStore.actions.setStatusMessage(`created user, ${json.name}`));
-        dispatch(statusStore.actions.setErrorMessage(null))
-				dispatch(statusStore.actions.setLoading(false));
+				dispatch(statusStore.actions.setErrorMessage(null))
+        dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch( (err) => {
         console.log("error", err)
@@ -148,7 +147,6 @@ export const favoritingGames = (user, slug) => {
 			})
 			.then((json) => {
         dispatch(userStore.actions.addingGames(json.favoriteGames))
-        dispatch(statusStore.actions.setErrorMessage(null))
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
@@ -164,8 +162,7 @@ export const logout = () => {
 		dispatch(userStore.actions.loginUser({ name: "", id: "", accessToken: "" }));
     dispatch(userStore.actions.addingMessages([]));
     dispatch(userStore.actions.addingGames([]));
-    dispatch(statusStore.setStatusMessage("user logged out"))
-    dispatch(statusStore.actions.setErrorMessage(null))
+    dispatch(statusStore.actions.setStatusMessage("user logged out"))
 
 	};
 };

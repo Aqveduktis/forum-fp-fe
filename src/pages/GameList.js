@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { gameStore, fetchGames } from '../reducers/gameStore';
+import { fetchGames } from '../reducers/gameStore';
 import { Page } from 'lib/containers';
 import { PageTitle } from 'lib/text';
 import { GameCard } from '../components/GameCard';
@@ -41,7 +41,7 @@ export const GameList = () => {
 			{games && (
 				<Wrapper>
 					{games.map((game) => {
-						return <GameCard info={game} />;
+						return <GameCard key={game._id} info={game} />;
 					})}
 				</Wrapper>
 			)}

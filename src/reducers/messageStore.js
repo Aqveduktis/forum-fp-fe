@@ -58,7 +58,7 @@ export const fetchMessage = () => {
 			})
 			.catch((err) => {
 				console.log(err);
-				dispatch(messageStore.actions.setMessageStatus('could not fetch messages'));
+				dispatch(statusStore.actions.setErrorMessage('could not fetch messages'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
@@ -80,11 +80,9 @@ export const postMessage = (user, message, game) => {
 				}
 			})
 			.then((json) => {
-				console.log('new post', json);
 				dispatch(messageStore.actions.newMessage(json));
 				dispatch(userStore.actions.addingOneMessage(json));
 				dispatch(statusStore.actions.setStatusMessage(null));
-				dispatch(statusStore.actions.setErrorMessage(null));
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
@@ -141,7 +139,6 @@ export const deleteMessage = (message, user) => {
 			})
 			.then((json) => {
 				dispatch(statusStore.actions.setStatusMessage('removed the message'));
-				dispatch(statusStore.actions.setErrorMessage(null));
 				dispatch(messageStore.actions.removeMessage(message));
 				dispatch(userStore.actions.removeMessage(message));
 				dispatch(statusStore.actions.setLoading(false));

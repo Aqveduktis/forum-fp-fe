@@ -20,8 +20,8 @@ a {
 
 
 export const PageTitle = styled.h2`
-margin: 10px;
-color: #c4a747;
+margin: 0;
+color: silver;
 font-size: 1.8em;
 
 `
@@ -35,7 +35,7 @@ text-decoration: none;
 `
 
 export const StyledLink = styled(NavLink)`
-margin: 10px;
+margin-right: 1em;
 font-size: 1.5em;
 color: silver;
 font-weight: bold;

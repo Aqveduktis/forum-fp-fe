@@ -23,7 +23,7 @@ export const Home = () => {
 			{messages && (
 				<Wrapper>
 					{messages.map((message) => {
-						return <MessageCard info={message} />;
+						return <MessageCard key={message._id} info={message} />;
 					})}
 				</Wrapper>
 			)}
