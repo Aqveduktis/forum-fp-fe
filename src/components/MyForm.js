@@ -10,15 +10,22 @@ export const MyForm = ({ handleSubmit, info }) => {
 	const handleForm = (event) => {
 		event.preventDefault();
 		handleSubmit(name, password);
-    setPassword("")
-    setName("")
+		setPassword('');
+		setName('');
 	};
 
 	return (
 		<Form onSubmit={handleForm}>
 			<FormTitle>{info}</FormTitle>
 			<label>User Name</label>
-			<TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
+			<TextInput
+				type="text"
+				pattern="[a-zA-Z0-9]+"
+				placeholder="monty"
+				minlength="2"
+				value={name}
+				onChange={(e) => setName(e.target.value)}
+			/>
 			<label>Password</label>
 			<TextInput type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 			<Submit type="submit">{info}</Submit>
