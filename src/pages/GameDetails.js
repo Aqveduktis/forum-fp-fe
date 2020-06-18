@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
 import { PageTitle, Text } from 'lib/text';
 import {StarButton} from 'lib/shared'
@@ -48,9 +48,13 @@ export const GameDetails = () => {
 							<Text size={1.3}>Genres:</Text>
 							<Gallery>
 								{game.genres.map((genre) => (
-									<PictureBox background={genre.image_background}>
-										<p>{genre.name}</p>
+                  <div>
+                  <Link to={`/genres/${genre.slug}`}>{genre.name}</Link>
+                  <PictureBox background={genre.image_background}>
+										<Link to={`/genres/${genre.slug}`}>{genre.name}</Link>
 									</PictureBox>
+                  </div>
+									
 								))}
 							</Gallery>
 							<Text size={1.3}>Comments:</Text>

@@ -3,7 +3,8 @@ import { statusStore } from './statusStore';
 
 const initialState = {
 	gameList: [],
-	selectedGame: {}
+	selectedGame: {},
+  selectedGenre: {}
 };
 
 export const gameStore = createSlice({
@@ -17,6 +18,9 @@ export const gameStore = createSlice({
 		setGame: (state, action) => {
 			const gameInfo = action.payload;
 			state.selectedGame = gameInfo;
+		},
+    setGenre: (state, action) => {
+			state.selectedGenre = action.payload;
 		}
 	}
 });
@@ -64,6 +68,31 @@ export const fetchOneGame = (slug) => {
 				console.log('error', err);
 				dispatch(statusStore.actions.setErrorMessage('could not fetch game'));
 				dispatch(gameStore.actions.setGame({}));
+				dispatch(statusStore.actions.setLoading(false));
+			});
+	};
+};
+
+export const fetchOneGenre = (slug) => {
+	const GAMES_URL = `https://aqveduktis-final-project.herokuapp.com/genres/${slug}`;
+	return (dispatch) => {
+		dispatch(statusStore.actions.setLoading(true));
+		fetch(GAMES_URL)
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw `error was ${res.status}`;
+				}
+			})
+			.then((json) => {
+				dispatch(gameStore.actions.setGenre(json));
+				dispatch(statusStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				console.log('error', err);
+				dispatch(statusStore.actions.setErrorMessage('could not fetch genre'));
+				dispatch(gameStore.actions.setGenre({}));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
