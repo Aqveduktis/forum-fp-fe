@@ -3,7 +3,7 @@ import { statusStore } from './statusStore';
 
 const initialState = {
 	gameList: [],
-	selectedGame: {},
+	selectedGame: {}
 };
 
 export const gameStore = createSlice({
@@ -17,8 +17,7 @@ export const gameStore = createSlice({
 		setGame: (state, action) => {
 			const gameInfo = action.payload;
 			state.selectedGame = gameInfo;
-		},
-
+		}
 	}
 });
 export const fetchGames = () => {
@@ -35,12 +34,10 @@ export const fetchGames = () => {
 			})
 			.then((json) => {
 				dispatch(gameStore.actions.addingGames(json));
-        dispatch(statusStore.actions.setErrorMessage(null))
-        dispatch(statusStore.actions.setStatusMessage(null))
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-        console.log("error", err)
+				console.log('error', err);
 				dispatch(statusStore.actions.setErrorMessage('could not fetch the games'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
@@ -61,13 +58,11 @@ export const fetchOneGame = (slug) => {
 			})
 			.then((json) => {
 				dispatch(gameStore.actions.setGame(json));
-        dispatch(statusStore.actions.setErrorMessage(null))
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-        console.log("error", err)
-        dispatch(statusStore.actions.setErrorMessage('could not fetch game'))
-        dispatch(statusStore.actions.setStatusMessage(null))
+				console.log('error', err);
+				dispatch(statusStore.actions.setErrorMessage('could not fetch game'));
 				dispatch(gameStore.actions.setGame({}));
 				dispatch(statusStore.actions.setLoading(false));
 			});

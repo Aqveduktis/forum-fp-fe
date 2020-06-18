@@ -51,8 +51,6 @@ export const fetchMessage = () => {
 			})
 			.then((json) => {
 				dispatch(messageStore.actions.addingMessages(json));
-				dispatch(statusStore.actions.setStatusMessage(null));
-				dispatch(statusStore.actions.setErrorMessage(null));
 				dispatch(statusStore.actions.setLoading(false));
 				console.log(json);
 			})
@@ -82,7 +80,6 @@ export const postMessage = (user, message, game) => {
 			.then((json) => {
 				dispatch(messageStore.actions.newMessage(json));
 				dispatch(userStore.actions.addingOneMessage(json));
-				dispatch(statusStore.actions.setStatusMessage(null));
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
@@ -111,7 +108,6 @@ export const likeMessage = (message) => {
 			.then((json) => {
 				dispatch(messageStore.actions.changingMessage(json));
 				dispatch(statusStore.actions.setStatusMessage('liked a message'));
-				dispatch(statusStore.actions.setErrorMessage(null));
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {

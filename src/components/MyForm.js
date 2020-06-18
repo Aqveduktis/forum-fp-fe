@@ -23,11 +23,18 @@ export const MyForm = ({ handleSubmit, info }) => {
 				pattern="[a-zA-Z0-9]+"
 				placeholder="monty"
 				minlength="2"
+				required
 				value={name}
 				onChange={(e) => setName(e.target.value)}
 			/>
 			<label>Password</label>
-			<TextInput type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+			<TextInput
+				type="password"
+				minlength="4"
+				required
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+			/>
 			<Submit type="submit">{info}</Submit>
 		</Form>
 	);

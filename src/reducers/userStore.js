@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {statusStore} from 'reducers/statusStore'
+import { statusStore } from 'reducers/statusStore';
 import { useHistory } from 'react-router-dom';
 
 const initialState = {
@@ -9,8 +9,7 @@ const initialState = {
 		accessToken: ''
 	},
 	messages: [],
-  games: [],
-
+	games: []
 };
 
 export const userStore = createSlice({
@@ -21,26 +20,25 @@ export const userStore = createSlice({
 			const { name, id, accessToken } = action.payload;
 			state.user = { name, id, accessToken };
 		},
-	    addingMessages: (state, action) => {
+		addingMessages: (state, action) => {
 			state.messages = action.payload;
 		},
-    addingOneMessage: (state, action) => {
-      const myList = state.messages
-      myList.push(action.payload)
-      state.messages = myList
-    },
-    
-    addingGames: (state, action) => {
+		addingOneMessage: (state, action) => {
+			const myList = state.messages;
+			myList.push(action.payload);
+			state.messages = myList;
+		},
+
+		addingGames: (state, action) => {
 			state.games = action.payload;
 		},
-	
-    removeMessage: (state, action) => {
-  const message = action.payload
-   const oldList = state.messages
-  const newList = oldList.filter((item)=>(item._id !== message._id))
-  state.messages = newList
 
-}
+		removeMessage: (state, action) => {
+			const message = action.payload;
+			const oldList = state.messages;
+			const newList = oldList.filter((item) => item._id !== message._id);
+			state.messages = newList;
+		}
 	}
 });
 
@@ -65,8 +63,8 @@ export const login = (name, password) => {
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-        console.log("error", err)
-				dispatch(statusStore.actions.setErrorMessage("there was an error login in"));
+				console.log('error', err);
+				dispatch(statusStore.actions.setErrorMessage('there was an error login in'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
@@ -84,16 +82,15 @@ export const register = (name, password) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`
+					throw `error was ${res.status}`;
 				}
 			})
 			.then((json) => {
 				dispatch(statusStore.actions.setStatusMessage(`created user, ${json.name}`));
-				dispatch(statusStore.actions.setErrorMessage(null))
-        dispatch(statusStore.actions.setLoading(false));
+				dispatch(statusStore.actions.setLoading(false));
 			})
-			.catch( (err) => {
-        console.log("error", err)
+			.catch((err) => {
+				console.log('error', err);
 				dispatch(statusStore.actions.setErrorMessage(`there was an error registrating new user ${name}`));
 				dispatch(statusStore.actions.setLoading(false));
 			});
@@ -105,26 +102,24 @@ export const addingUser = (user) => {
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
-      method: 'GET',
-      headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}`}
-      })
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json', Authorization: `${user.accessToken}` }
+		})
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`
+					throw `error was ${res.status}`;
 				}
 			})
 			.then((json) => {
-        dispatch(userStore.actions.addingMessages(json.messages))
-        dispatch(userStore.actions.addingGames(json.favoriteGames))
-        dispatch(statusStore.actions.setStatusMessage(null))
-        dispatch(statusStore.actions.setErrorMessage(null))
+				dispatch(userStore.actions.addingMessages(json.messages));
+				dispatch(userStore.actions.addingGames(json.favoriteGames));
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-        console.log(err)
-				dispatch(statusStore.actions.setErrorMessage("There was an error fetching data"));
+				console.log(err);
+				dispatch(statusStore.actions.setErrorMessage('There was an error fetching data'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
@@ -135,9 +130,9 @@ export const favoritingGames = (user, slug) => {
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
-      method: 'PUT',
-      headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}`}
-      })
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json', Authorization: `${user.accessToken}` }
+		})
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
@@ -146,12 +141,12 @@ export const favoritingGames = (user, slug) => {
 				}
 			})
 			.then((json) => {
-        dispatch(userStore.actions.addingGames(json.favoriteGames))
+				dispatch(userStore.actions.addingGames(json.favoriteGames));
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-        console.log("error", err)
-				dispatch(statusStore.actions.setLoginMessage("there wass an error favoriting the game"));
+				console.log('error', err);
+				dispatch(statusStore.actions.setLoginMessage('there wass an error favoriting the game'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};
@@ -159,11 +154,10 @@ export const favoritingGames = (user, slug) => {
 
 export const logout = () => {
 	return (dispatch) => {
-		dispatch(userStore.actions.loginUser({ name: "", id: "", accessToken: "" }));
-    dispatch(userStore.actions.addingMessages([]));
-    dispatch(userStore.actions.addingGames([]));
-    dispatch(statusStore.actions.setStatusMessage("user logged out"))
-
+		dispatch(userStore.actions.loginUser({ name: '', id: '', accessToken: '' }));
+		dispatch(userStore.actions.addingMessages([]));
+		dispatch(userStore.actions.addingGames([]));
+		dispatch(statusStore.actions.setStatusMessage('user logged out'));
 	};
 };
 
@@ -172,9 +166,9 @@ export const deleteUser = (user) => {
 	return (dispatch) => {
 		dispatch(statusStore.actions.setLoading(true));
 		fetch(REG_URL, {
-      method: 'DELETE',
-      headers: {'Content-Type':'application/json','Authorization':`${user.accessToken}`}
-      })
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json', Authorization: `${user.accessToken}` }
+		})
 			.then((res) => {
 				if (res.ok) {
 					return res.json();
@@ -183,16 +177,15 @@ export const deleteUser = (user) => {
 				}
 			})
 			.then((json) => {
-        dispatch(userStore.actions.loginUser({ name: "", id: "", accessToken: "" }));
-        dispatch(userStore.actions.addingMessages([]))
-        dispatch(userStore.actions.addingGames([]))
+				dispatch(userStore.actions.loginUser({ name: '', id: '', accessToken: '' }));
+				dispatch(userStore.actions.addingMessages([]));
+				dispatch(userStore.actions.addingGames([]));
 				dispatch(statusStore.actions.setStatusMessage(`removed user ${user.name}`));
-        dispatch(statusStore.actions.setErrorMessage(null))
 				dispatch(statusStore.actions.setLoading(false));
 			})
 			.catch((err) => {
-        console.log("error", err)
-				dispatch(statusStore.actions.setErrorMessage("could not remove user"));
+				console.log('error', err);
+				dispatch(statusStore.actions.setErrorMessage('could not remove user'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};

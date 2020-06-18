@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GameDetails } from './GameDetails';
 import { GameList } from './GameList';
 import { UserPage } from './UserPage';
+import { GenreDetail } from './GenreDetail';
 import { Header } from 'components/Header';
 import { Home } from 'components/Home';
 import { Box } from 'lib/containers';
@@ -25,6 +26,9 @@ export const HomePage = () => {
 					</Route>
 					<Route path="/games/:slug">
 						<GameDetails />
+					</Route>
+					<Route path="/genres/:slug">
+						<GenreDetail />
 					</Route>
 				</Switch>
 				<Footer />
