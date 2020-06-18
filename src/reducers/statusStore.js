@@ -11,16 +11,15 @@ export const statusStore = createSlice({
   name: 'statusStore',
   initialState,
   reducers: {
-setStatusMessage: (state, action) => {
-  state.statusMessage = action.payload
-},
-setErrorMessage: (state, action) => {
-  state.errorMessage = action.payload
-},
-	setLoading: (state, action) => {
+    setStatusMessage: (state, action) => {
+      state.statusMessage = action.payload
+    },
+    setErrorMessage: (state, action) => {
+      state.errorMessage = action.payload
+    },
+	  setLoading: (state, action) => {
 			state.isLoading = action.payload;
 		},
-
   }
 
 })
