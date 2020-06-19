@@ -101,13 +101,14 @@ export const PictureBox = styled.div`
 	width: 100px;
 	max-width: 33vw;
 	height: 100px;
+  margin: 0 10px 10px 0;
 	background: ${(props) => `url(${props.background})` || 'darkslategray'};
 	background-size: cover;
 	background-position: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	p {
+	a {
 		color: white;
     background-color: black;
     opacity: 0.7;

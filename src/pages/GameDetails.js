@@ -48,12 +48,9 @@ export const GameDetails = () => {
 							<Text size={1.3}>Genres:</Text>
 							<Gallery>
 								{game.genres.map((genre) => (
-                  <div>
-                  <Link to={`/genres/${genre.slug}`}>{genre.name}</Link>
                   <PictureBox background={genre.image_background}>
 										<Link to={`/genres/${genre.slug}`}>{genre.name}</Link>
 									</PictureBox>
-                  </div>
 									
 								))}
 							</Gallery>
