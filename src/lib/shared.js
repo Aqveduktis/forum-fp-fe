@@ -2,10 +2,14 @@ import styled from 'styled-components'
 
 export const Button = styled.button`
 padding: 10px 20px;
-background-color: #bb86fc;
-color: black;
+background-color: #bc5f6a;
+color: white;
 border: none;
 border-radius: 5px;
+cursor: pointer;
+&:hover {
+  background-color: crimson;
+}
 `
 export const HeartButton = styled.button`
   background: none;

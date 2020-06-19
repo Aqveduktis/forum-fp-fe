@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+//prussian blue: #003153
+//morning blue: #8da339;
+//periwinkle: ccccff
+
 export const Form = styled.form`
 	background-color: #222;
 	width: 250px;
@@ -30,8 +34,11 @@ export const Submit = styled.button`
 	height: 30px;
 	margin-top: 20px;
 	border: none;
-	background-color: #6b1dc3;
+	background-color: #007fff;
 	color: white;
+  &:hover {
+    background-color: darkblue;
+  }
 `;
 
 export const Border = styled.form`

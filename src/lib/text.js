@@ -23,6 +23,7 @@ export const PageTitle = styled.h2`
 margin: 0;
 color: silver;
 font-size: 1.8em;
+text-transform: uppercase;
 
 `
 export const Title = styled(Link)`
@@ -41,6 +42,10 @@ color: silver;
 font-weight: bold;
 border-bottom: 2px solid silver; 
 text-decoration: none;
+&:hover{
+  color: #bc7a94;
+  border-color: #bc7a94;
+}
 `;
 //#03dac5;
 
@@ -49,6 +54,10 @@ padding: 10px 20px;
 background-color: #bc5f6a;
 color: white;
 text-decoration: none;
+border-radius: 5px;
+&:hover {
+  background-color: crimson;
+}
 `
 export const SmallLink = styled(Link)`
 color: cyan;
