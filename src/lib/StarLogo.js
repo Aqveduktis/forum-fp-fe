@@ -23,9 +23,6 @@ stroke: yellow;
 width: ${props=>(props.width || 100)}px;
 height: ${props=>(props.width || 100)}px;
 
-&:hover {
-  fill: yellow;
-}
 `
 
 

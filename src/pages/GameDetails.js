@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
-import { PageTitle, Text } from 'lib/text';
+import { PageTitle, Text, NormalLink } from 'lib/text';
 import {StarButton} from 'lib/shared'
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchOneGame } from 'reducers/gameStore';
-import { favoritingGames } from 'reducers/userStore';
+import { fetchOneGame, favoritingGames  } from 'reducers/gameStore';
 import { TextBox } from 'components/TextBox';
 import { StarLogo } from 'lib/StarLogo';
 import { NotFound } from 'components/NotFound';
@@ -38,8 +37,12 @@ export const GameDetails = () => {
 				<div>
 					<Banner>
 						<div>
+                {!user.name &&
+                <div>
+                <Text>Please login to favorite games</Text>
+                </div>}
 							{myGames && (
-								<StarButton onClick={handleLike}>
+								<StarButton disabled={!user.name} onClick={handleLike}>
 									<StarLogo clicked={myGames.includes(slug)} />
 								</StarButton>
 							)}

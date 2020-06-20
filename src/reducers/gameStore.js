@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { statusStore } from './statusStore';
+import {userStore} from './userStore'
 
 const initialState = {
 	gameList: [],
@@ -68,6 +69,33 @@ export const fetchOneGame = (slug) => {
 				console.log('error', err);
 				dispatch(statusStore.actions.setErrorMessage('could not fetch game'));
 				dispatch(gameStore.actions.setGame({}));
+				dispatch(statusStore.actions.setLoading(false));
+			});
+	};
+};
+
+export const favoritingGames = (user, slug) => {
+	const REG_URL = `https://aqveduktis-final-project.herokuapp.com/users/${user.id}/${slug}`;
+	return (dispatch) => {
+		dispatch(statusStore.actions.setLoading(true));
+		fetch(REG_URL, {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json', Authorization: `${user.accessToken}` }
+		})
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw `error was ${res.status}`;
+				}
+			})
+			.then((json) => {
+				dispatch(userStore.actions.addingGames(json.favoriteGames));
+				dispatch(statusStore.actions.setLoading(false));
+			})
+			.catch((err) => {
+				console.log('error', err);
+				dispatch(statusStore.actions.setErrorMessage('there was an error favoriting the game'));
 				dispatch(statusStore.actions.setLoading(false));
 			});
 	};

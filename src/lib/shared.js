@@ -56,6 +56,14 @@ export const StarButton = styled.button`
 	background: none;
 	border: none;
 	cursor: pointer;
+
+  &:hover:enabled svg {
+    fill: yellow;
+  }
+
+  &:disabled svg {
+    stroke: silver;
+  }
 `;
 
 export const CheckBoxWrapper = styled.div`

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 //periwinkle: ccccff
 
 export const Form = styled.form`
-	background-color: #222;
+  border: 2px solid #007fff;
 	width: 250px;
 	height: 300px;
 	border-radius: 50px;
@@ -27,7 +27,7 @@ export const TextInput = styled.input`
 	border-radius: 20px;
 	padding: 5px;
 	background-color: unset;
-	border: 2px solid #888;
+	border: 2px solid white;
 `;
 export const Submit = styled.button`
 	width: 100px;

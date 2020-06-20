@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
 import {NotFound} from 'components/NotFound'
 import { PageTitle, Text, SmallLink } from 'lib/text';
+import {Image} from 'lib/shared'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneGenre } from 'reducers/gameStore';
 
@@ -22,7 +23,7 @@ export const GenreDetail = () => {
 			<PageTitle>{slug}</PageTitle>
       {genre.name &&
       <div>
-        <img src={genre.backgroundImage} style={{width: 300}} />
+        <Image src={genre.backgroundImage} />
         <Text>{genre.description.replace(/<\/?p[^>]*>/g, "")}</Text>
         <Text size={1.3}>Games in this genre:</Text>
         {games && games.map((game)=>(
