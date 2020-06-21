@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Form, Border, FormTitle, TextInput, Submit } from 'lib/form';
+import { Form, FormTitle, TextInput, Submit } from 'lib/form';
 
 export const MyForm = ({ handleSubmit, info }) => {
 	const [ name, setName ] = useState('');
 	const [ password, setPassword ] = useState('');
-	const dispatch = useDispatch();
-
+	
 	const handleForm = (event) => {
 		event.preventDefault();
 		handleSubmit(name, password);

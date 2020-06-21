@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userStore } from './userStore';
 
 const initialState = {
   isLoading: false,

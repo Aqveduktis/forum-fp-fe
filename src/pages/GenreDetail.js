@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
+import { Page } from 'lib/containers';
 import {NotFound} from 'components/NotFound'
 import { PageTitle, Text, SmallLink } from 'lib/text';
 import {Image} from 'lib/shared'
@@ -17,22 +17,24 @@ export const GenreDetail = () => {
 		}) )
   useEffect(()=>{
     dispatch(fetchOneGenre(slug))
-  },[slug])
+  },[slug, dispatch])
 	return (
 		<Page>
-			<PageTitle>{slug}</PageTitle>
-      {genre.name &&
+    {genre.name &&
+    <>
+			<PageTitle>{genre.name}</PageTitle>
       <div>
-        <Image src={genre.backgroundImage} />
+        <Image src={genre.backgroundImage} alt={genre.name} />
         <Text>{genre.description.replace(/<\/?p[^>]*>/g, "")}</Text>
         <Text size={1.3}>Games in this genre:</Text>
         {games && games.map((game)=>(
-          <SmallLink to={`/games/${game.slug}`}>{game.name}</SmallLink>
-        ) 
-        )}
+          <SmallLink key={game._id} to={`/games/${game.slug}`}>{game.name}</SmallLink>
+        )) 
+        }
       </div>
+      </>
        }
-       {(!genre && !loading) && <NotFound />}
+       {(!genre.name && !loading) && <NotFound />}
 
       
 		</Page>

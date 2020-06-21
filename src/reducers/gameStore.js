@@ -34,7 +34,8 @@ export const fetchGames = () => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+					throw new Error(`code is ${res.status}`);
+					
 				}
 			})
 			.then((json) => {
@@ -58,7 +59,7 @@ export const fetchOneGame = (slug) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+						throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -86,7 +87,7 @@ export const favoritingGames = (user, slug) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+						throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -110,7 +111,7 @@ export const fetchOneGenre = (slug) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+						throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {

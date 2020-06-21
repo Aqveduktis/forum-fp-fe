@@ -11,7 +11,7 @@ export const UserPage = () => {
 	return (
 		<Page>
 			<PageTitle>{user.name}</PageTitle>
-{user.name ? <User user={user} /> : <Login />}
+      {user.name ? <User user={user} /> : <Login />}
 		</Page>
 	);
 };

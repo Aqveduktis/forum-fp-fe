@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
-import { PageTitle, Text, NormalLink } from 'lib/text';
+import { PageTitle, Text } from 'lib/text';
 import {StarButton} from 'lib/shared'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchOneGame, favoritingGames  } from 'reducers/gameStore';
@@ -14,7 +14,7 @@ export const GameDetails = () => {
 	const { slug } = useParams();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userStore.user);
-	const posts = useSelector((state) => state.messageStore.messageList.filter((item) => item.game == slug));
+	const posts = useSelector((state) => state.messageStore.messageList.filter((item) => item.game === slug));
 	const loading = useSelector((state) => state.statusStore.isLoading);
 	const game = useSelector((state) => state.gameStore.selectedGame);
 	const myGames = useSelector((state) => state.userStore.games);
@@ -23,7 +23,7 @@ export const GameDetails = () => {
 		() => {
 			dispatch(fetchOneGame(slug));
 		},
-		[ slug ]
+		[ slug, dispatch ]
 	);
 
 	const handleLike = () => {
@@ -72,8 +72,8 @@ export const GameDetails = () => {
 
 					<Gallery>
 						{game.screenshots &&
-							game.screenshots.map((picture) => {
-								return <img src={picture.image} />;
+							game.screenshots.map((picture, index) => {
+								return <img key={picture.id} src={picture.image} alt={`screenshot from ${game.name} number ${index + 1}`} />;
 							})}
 					</Gallery>
 				</div>

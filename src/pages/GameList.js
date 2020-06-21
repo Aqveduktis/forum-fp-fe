@@ -21,7 +21,7 @@ export const GameList = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchGames());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Page>

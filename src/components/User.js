@@ -17,7 +17,7 @@ export const User = ({user}) => {
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(addingUser(user))
-  },[user])
+  },[user, dispatch])
 
   const handleLogout = () => {
     dispatch(logout())

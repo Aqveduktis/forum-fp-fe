@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { statusStore } from 'reducers/statusStore';
-import { useHistory } from 'react-router-dom';
 
 const initialState = {
 	user: {
@@ -55,7 +54,7 @@ export const login = (name, password) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+							throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -82,7 +81,7 @@ export const register = (name, password) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+						throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -109,7 +108,7 @@ export const addingUser = (user) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+					throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -147,7 +146,7 @@ export const deleteUser = (user) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+						throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {

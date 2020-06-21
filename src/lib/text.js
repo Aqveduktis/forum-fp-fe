@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components'
+import styled from 'styled-components'
 import {Link, NavLink} from 'react-router-dom'
 
 export const Text = styled.p`
@@ -67,16 +67,4 @@ cursor: pointer;
 &:hover {
   color: lightgray;
 }
-`
-
-const colorChanging = keyframes`
-0%   {color: white;}
-50%  {color: black;}
-100% {color: white;}
-
-`
-export const Loading = styled.p`
-font-size: 20px;
-font-width: bold;
-animation: ${colorChanging} 5s linear infinite;
 `

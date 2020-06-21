@@ -46,7 +46,7 @@ export const fetchMessage = () => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+          throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -74,7 +74,7 @@ export const postMessage = (user, message, game) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+					throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -102,7 +102,7 @@ export const likeMessage = (message) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+          throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {
@@ -130,7 +130,7 @@ export const deleteMessage = (message, user) => {
 				if (res.ok) {
 					return res.json();
 				} else {
-					throw `error was ${res.status}`;
+					throw new Error(`code is ${res.status}`);
 				}
 			})
 			.then((json) => {

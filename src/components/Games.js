@@ -6,7 +6,6 @@ import {Text} from 'lib/text'
 
 export const Games = () => {
   const games = useSelector((store)=>store.gameStore.gameList)
-console.log("games", games)
   return(
 
     <Wrapper>

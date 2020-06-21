@@ -5,7 +5,7 @@ export const GameCard = ({ info }) => {
 	return (
 		<CardLink to={`/games/${info.slug}`}>
 			<Article>
-				<img src={info.backgroundImage} />
+				<img src={info.backgroundImage} alt={info.name} />
 				<h2>{info.name}</h2>
 			</Article>
 		</CardLink>

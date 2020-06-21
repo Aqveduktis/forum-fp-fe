@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {useSelector} from 'react-redux'
  import Loader from 'react-loader-spinner'
-import styled, {keyframes} from 'styled-components';
-import { Title, Text, StyledLink, Loading } from 'lib/text';
-import { Banner, LinkNav, TopBanner } from 'lib/containers';
+import styled from 'styled-components';
+import { Title, Text, StyledLink } from 'lib/text';
+import { LinkNav, TopBanner } from 'lib/containers';
 import { UserLogo } from 'lib/UserLogo';
 
 const Wrapper = styled.div`
