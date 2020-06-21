@@ -36,9 +36,15 @@ export const Submit = styled.button`
 	border: none;
 	background-color: #007fff;
 	color: white;
-  &:hover {
+  &:hover:enabled {
     background-color: darkblue;
   }
+
+  &:disabled {
+    background-color: gray;
+    color: black;
+  }
+
 `;
 
 export const Border = styled.form`

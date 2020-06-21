@@ -21,8 +21,8 @@ export const TextBox = ({slug}) => {
     {user.name && 
     <Border onSubmit={handleSubmit}>
     <Label htmlFor="textbox">Write your message</Label>
-    <Input id="textbox" value={text} onChange={(e)=>setText(e.target.value)} />
-    <Submit type="submit">Submit</Submit>
+    <Input id="textbox" value={text} onChange={(e)=>setText(e.target.value)} required />
+    <Submit disabled={!text} type="submit">Submit</Submit>
    
     </Border>
     }

@@ -52,7 +52,6 @@ export const fetchMessage = () => {
 			.then((json) => {
 				dispatch(messageStore.actions.addingMessages(json));
 				dispatch(statusStore.actions.setLoading(false));
-				console.log(json);
 			})
 			.catch((err) => {
 				console.log(err);

@@ -16,7 +16,6 @@ export const GameList = () => {
 			return game.genres.find((item) => item.slug.includes(genre));
 		})
 	);
-	console.log('games', games);
 
 	const dispatch = useDispatch();
 	useEffect(() => {

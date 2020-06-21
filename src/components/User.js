@@ -13,7 +13,6 @@ import { Warning } from 'lib/Warning'
 export const User = ({user}) => {
   const myMessages = useSelector((state)=>state.userStore.messages)
   const myGames = useSelector((state)=>state.userStore.games)
-  console.log("games", myGames)
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(addingUser(user))
@@ -31,20 +30,21 @@ export const User = ({user}) => {
 
   return(
     <div>
-    <Button onClick={handleLogout}>Log out</Button>
+    
      <Text size={1.3}>My messages</Text>
     <Card>
       
     {myMessages && myMessages.map((message)=>{
-      return(<Banner>
+      return(<Banner key={message._id}>
     <Text>{message.message} - </Text><SmallButton onClick={()=>handleRemove(message)}>remove</SmallButton></Banner> )
     })}    
     </Card>
-    <Banner>
-       <div>
+           <div>
     <Text size={1.3}>My Favorite games</Text>
-    {myGames && myGames.map((game)=>{return<SmallLink to={`/games/${game}`}>{game}</SmallLink>})}
+    {myGames && myGames.map((game)=>( <SmallLink key={game} to={`/games/${game}`}>{game}</SmallLink>))}
     </div>
+    <Banner>
+    <Button onClick={handleLogout}>Log out</Button>
     <Triangle onClick={handleDelete}><Warning /><p>Delete myself</p></Triangle>
     </Banner>
     </div>

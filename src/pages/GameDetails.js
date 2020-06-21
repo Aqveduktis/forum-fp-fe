@@ -51,7 +51,7 @@ export const GameDetails = () => {
 							<Text size={1.3}>Genres:</Text>
 							<Gallery>
 								{game.genres.map((genre) => (
-                  <PictureBox background={genre.image_background}>
+                  <PictureBox key={genre.id} background={genre.image_background}>
 										<Link to={`/genres/${genre.slug}`}>{genre.name}</Link>
 									</PictureBox>
 									
@@ -61,7 +61,7 @@ export const GameDetails = () => {
 							{posts &&
 								posts.map((post) => {
 									return (
-										<Text>
+										<Text key={post._id}>
 											{post.message} - {post.user.name}
 										</Text>
 									);

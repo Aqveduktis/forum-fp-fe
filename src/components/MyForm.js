@@ -33,7 +33,7 @@ export const MyForm = ({ handleSubmit, info }) => {
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 			/>
-			<Submit type="submit">{info}</Submit>
+			<Submit disabled={!name || !password} type="submit">{info}</Submit>
 		</Form>
 	);
 };
