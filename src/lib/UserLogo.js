@@ -1,21 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {LogoWrapper} from 'lib/images'
 
-const LogoWrapper = styled.div`
-	width: ${(props) => props.width || 100}px;
-	height: ${(props) => props.width || 100}px;
-	margin: 10px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 2px solid ${(props) => props.color || 'white'};
 
-	svg {
-		fill: ${(props) => props.color || 'white'};
-		width: 60%;
-	}
-`;
 
 export const UserLogo = (props) => {
 	return (

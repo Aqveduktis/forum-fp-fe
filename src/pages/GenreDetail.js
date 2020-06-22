@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Page } from 'lib/containers';
 import {NotFound} from 'components/NotFound'
 import { PageTitle, Text, SmallLink } from 'lib/text';
-import {Image} from 'lib/shared'
+import { Image } from 'lib/images'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOneGenre } from 'reducers/gameStore';
 

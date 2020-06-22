@@ -1,61 +1,72 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-padding: 10px 20px;
-background-color: #bc5f6a;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-&:hover {
-  background-color: crimson;
-}
+  padding: 10px 20px;
+  background-color: #bc5f6a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: crimson;
+  }
 `
 export const HeartButton = styled.button`
   background: none;
   border: none;
-	width: ${(props) => props.width*1.5 || 150}px;
-	height: ${(props) => props.width || 100}px;
+	width: 75px;
+	height: 50px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   svg {
-		fill: ${(props) => props.color || 'white'};
+		fill: palevioletred;
+    stroke: pink;
+    stroke-width: 0.5;
 		width: 50%;
     height: 100%;
 	}
+
   p {
-    color: ${(props) => props.color || 'white'};
-    font-size: ${(props) => props.width*0.3 || 50}px;
+    color: palevioletred;
+    
+  }
+  &:hover svg {
+    fill: pink;
   }
 `
 export const SmallButton=styled.button`
-background: none;
-border: none;
-padding: 0;
-color: crimson;
-font-size: 1.0em;
-cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: crimson;
+  font-size: 1.0em;
+  cursor: pointer;
 `
 export const Triangle = styled.button`
-background: none;
-border: none;
-cursor: pointer;
-&: hover {
-  opacity: 0.3;
-}
+  background: none;
+  border: none;
+  cursor: pointer;
+  &: hover {
+    opacity: 0.3;
+  }
 
-p {
-  color: yellow;
-  margin: 0;
-}
+  p {
+    color: yellow;
+    margin: 0;
+  }
 
 `
 export const StarButton = styled.button`
 	background: none;
 	border: none;
 	cursor: pointer;
+
+  svg {
+    fill: ${props => props.checked ? 'yellow' : 'none'};
+    stroke: yellow;
+  }
 
   &:hover:enabled svg {
     fill: yellow;
@@ -78,6 +89,7 @@ export const CheckBoxLabel = styled.label`
   border-radius: 15px;
   background: #19b3b1;
   cursor: pointer;
+
   &::after {
     content: "";
     display: block;
@@ -109,10 +121,4 @@ export const CheckBox = styled.input`
     }
   }
 `;
-export const Image = styled.img`
-  width: 400px;
-  haight: 400px;
-  max-width: 100%;
-  object-fit: cover;
 
-`

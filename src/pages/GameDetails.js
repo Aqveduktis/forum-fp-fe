@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Page, Banner, Gallery, PictureBox } from 'lib/containers';
 import { PageTitle, Text } from 'lib/text';
-import {StarButton} from 'lib/shared'
+import {StarButton} from 'lib/buttons'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchOneGame, favoritingGames  } from 'reducers/gameStore';
 import { TextBox } from 'components/TextBox';

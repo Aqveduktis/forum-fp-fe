@@ -1,12 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import {WarningSign} from 'lib/images'
 
-const WarningSign = styled.svg`
-  width: 100px;
-  height: 100px;
-  fill: yellow;
-  stroke: black;
-`
 
 export const Warning = () => {
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, SmallButton, Triangle } from 'lib/shared'
+import { Button, SmallButton, Triangle } from 'lib/buttons'
 import { Text, SmallLink } from 'lib/text'
 import {logout, addingUser, deleteUser} from '../reducers/userStore'
 import { deleteMessage } from 'reducers/messageStore'

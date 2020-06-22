@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { login, register } from 'reducers/userStore';
 import { MyForm } from './MyForm';
 import { Text } from 'lib/text';
-import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from 'lib/shared';
+import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from 'lib/buttons';
 
 
 export const Login = () => {

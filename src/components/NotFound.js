@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'lib/shared'
+import { Image } from 'lib/images'
 import {Text, NormalLink} from 'lib/text'
 
 

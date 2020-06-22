@@ -14,11 +14,15 @@ export const Form = styled.form`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
 	label {
 		color: white;
 	}
+`
+export const FormTitle = styled.h3`
+color: silver;
+font-size: 2em;
 `;
-export const FormTitle = styled.h3`color: silver;`;
 
 export const TextInput = styled.input`
 	width: 80%;
@@ -28,7 +32,8 @@ export const TextInput = styled.input`
 	padding: 5px;
 	background-color: unset;
 	border: 2px solid white;
-`;
+`
+
 export const Submit = styled.button`
 	width: 100px;
 	height: 30px;
@@ -45,7 +50,7 @@ export const Submit = styled.button`
     color: black;
   }
 
-`;
+`
 
 export const Border = styled.form`
 	background-color: unset;
@@ -59,24 +64,26 @@ export const Border = styled.form`
 	justify-content: space-around;
 	align-items: center;
   box-sizing: border-box;
-`;
+`
 export const Input = styled.textarea`
-width: 90%;
-height: 50px;
-margin 10px auto;
-color: white;
-border: none;
-border-bottom: 2px solid white;
-background: unset;
-&::focus {
-  border: 1px solid green;
-}
-`;
+  width: 90%;
+  height: 50px;
+  margin 10px auto;
+  color: white;
+  border: none;
+  border-bottom: 2px solid white;
+  background: unset;
+
+  &::focus {
+    border: 1px solid green;
+  }
+`
 
 export const Label = styled.label`
 	color: white;
 	text-width: bold;
-`;
+`
+
 export const SelectWrapper = styled.span`
 	display: inline-block;
 	position: relative;
@@ -92,7 +99,8 @@ export const SelectWrapper = styled.span`
 		height: 8px;
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8' fill='none'%3E%3Cpath id='Shape' d='M1.4175 0L0 1.34583L7 8L14 1.34583L12.5825 0L7 5.30417L1.4175 0Z' fill='white'/%3E%3C/svg%3E");
 	}
-`;
+`
+
 export const Select = styled.select`
 	content: "";
 	font-size: 18px;
@@ -107,4 +115,4 @@ export const Select = styled.select`
 	text-transform: uppercase;
 	-webkit-appearance: none;
 	appearance: none;
-`;
+`
