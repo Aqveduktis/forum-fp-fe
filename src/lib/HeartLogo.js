@@ -12,8 +12,6 @@ height: ${(props) => props.width || 100}px;
 }
 `
 
-
-
 export const HeartLogo = () => {
 	return (
     <Heart title="Heart for liking" width="30" viewBox="0 0 16.933 16.933">

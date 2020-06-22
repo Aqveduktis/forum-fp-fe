@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 const WarningSign = styled.svg`
-width: 100px;
-height: 100px;
-fill: yellow;
-stroke: black;
+  width: 100px;
+  height: 100px;
+  fill: yellow;
+  stroke: black;
 `
 
 export const Warning = () => {
