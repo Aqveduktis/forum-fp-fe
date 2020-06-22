@@ -106,21 +106,7 @@ export const CardLink = styled(Link)`
   }
 
 `
-export const Article = styled.article`
-	width: 100%;
-	background-color: darkslategray;
-	color: white;
 
-	img {
-		width: 100%;
-		height: 200px;
-		object-fit: cover;
-	}
-	h2 {
-		text-align: center;
-		height: 100px;
-	}
-`;
 export const PictureBox = styled.div`
 	width: 100px;
 	max-width: 33vw;

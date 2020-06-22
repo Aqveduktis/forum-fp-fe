@@ -18,7 +18,6 @@ a {
 }
 `
 
-
 export const PageTitle = styled.h2`
 margin: 0;
 color: silver;
