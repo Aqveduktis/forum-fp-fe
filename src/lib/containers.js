@@ -79,11 +79,32 @@ export const Gallery = styled.div`
 
 export const CardLink = styled(Link)`
   width: 30%;
+  height: 300px;
   text-decoration: none;
+  margin: 16px 0;
+  background: ${(props) => `url(${props.background})` || 'darkslategray'};
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  h2 {
+    color: white;
+    font-size: 2em;
+    background-color: black;
+    opacity: 0.5;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover h2 {
+    opacity: 1;
+  }
 
   @media (max-width: 576px) {
     width: 100%;
   }
+
 `
 export const Article = styled.article`
 	width: 100%;
