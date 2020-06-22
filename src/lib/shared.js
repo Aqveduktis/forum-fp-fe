@@ -112,6 +112,7 @@ export const CheckBox = styled.input`
 export const Image = styled.img`
   width: 400px;
   haight: 400px;
+  max-width: 100%;
   object-fit: cover;
 
 `

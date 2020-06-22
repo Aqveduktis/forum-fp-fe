@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 `;
 
 export const Card = styled.article`
@@ -117,6 +117,22 @@ export const PictureBox = styled.div`
 		text-shadow: 1px 1px black;
 	}
 `;
+export const Container = styled.article`
+  width: 300px;
+  max-width: 100%;
+  height: 100px;
+  min-height: auto;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: 1px solid gray;
+   p{
+     margin: 0 0 1em 0;
+   }
+` 
 
 export const BigBox = styled.article`
 width: 300px;

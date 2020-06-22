@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {Border, Label, Input, Submit} from 'lib/form'
+import {Container} from 'lib/containers'
 import {Text, NormalLink} from 'lib/text'
 import {postMessage} from 'reducers/messageStore'
 
@@ -17,7 +18,7 @@ export const TextBox = ({slug}) => {
 	};
 
   return(
-    <div>
+    <>
     {user.name && 
     <Border onSubmit={handleSubmit}>
     <Label htmlFor="textbox">Write your message</Label>
@@ -27,13 +28,13 @@ export const TextBox = ({slug}) => {
     </Border>
     }
     {!user.name &&
-    <div>
-    <Text>Please login to write messages</Text>
-    <NormalLink to='/user'>Login Page</NormalLink>
-    </div>
+    <Container>
+      <Text>Please login to write messages</Text>
+      <NormalLink to='/user'>Login Page</NormalLink>
+    </Container>
      }
     
-    </div>
+    </>
 
 
   )
