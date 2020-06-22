@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardLink, Article } from 'lib/containers';
+import { CardLink } from 'lib/containers';
 
 export const GameCard = ({ info }) => {
 	return (
