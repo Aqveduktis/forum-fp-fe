@@ -1,7 +1,5 @@
 import React from 'react';
-import {LogoWrapper} from 'lib/images'
-
-
+import { LogoWrapper } from 'lib/images';
 
 export const UserLogo = (props) => {
 	return (
